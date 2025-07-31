@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dr6wsi6x5cln4" path="res://prefabs/river/light_water.jpg" id="2_417ru"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6l012"]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("1_s5yy5")
 shader_parameter/albedo_texture = ExtResource("2_417ru")
 shader_parameter/albedo_multiplier = Vector3(0.96, 0.135, 0.115)
