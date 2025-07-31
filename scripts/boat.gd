@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var float_force := 1.0
 @export var water_drag := 0.05
 @export var water_angular_drag := 0.05
+@export var river_passive_force := 5
 
 @export var forward_row_force := 20
 @export var backward_row_force := 10
@@ -33,7 +34,8 @@ func _physics_process(_delta: float) -> void:
 		$CameraPivot/CameraTilt.rotation_degrees.x = clamp($CameraPivot/CameraTilt.rotation_degrees.x, 0, 90)
 
 		mouse_movement = Vector2()
-	
+
+	var collision_object: Path3D = null
 	submerged = false
 	for p in probes:
 		var depth = p.water_height - p.global_position.y + depth_bias
@@ -41,18 +43,32 @@ func _physics_process(_delta: float) -> void:
 		# what happens if we're not in water lol
 		if p.in_water and depth > 0:
 			submerged = true
+			collision_object = p.collision_object.get_parent()
 			var force = Vector3.UP * float_force * gravity * depth
 			apply_force(force, p.global_position - global_position)
 	
 	if submerged:
+		# river flow
+		if collision_object != null:
+			var curve = collision_object.curve
+			var closest_offset = curve.get_closest_offset(global_position)
+			var river_forward_direction = curve.sample_baked(closest_offset, true).direction_to(curve.sample_baked(closest_offset + .1, true)).normalized()
+			apply_central_force(river_forward_direction*river_passive_force)
+
 		if Input.is_action_pressed("move_forward"):
 			apply_central_force(global_transform.basis.z*forward_row_force)
 		if Input.is_action_pressed("move_backward"):
 			apply_central_force(-global_transform.basis.z*forward_row_force)
-		if Input.is_action_pressed("move_left"):
-			apply_torque(Vector3(0, 1, 0)*turn_force)
-		if Input.is_action_pressed("move_right"):
-			apply_torque(Vector3(0, -1, 0)*turn_force)
+			if Input.is_action_pressed("move_left"):
+				apply_torque(Vector3(0, -1, 0)*turn_force)
+			if Input.is_action_pressed("move_right"):
+				apply_torque(Vector3(0, 1, 0)*turn_force)
+		else:
+			if Input.is_action_pressed("move_left"):
+				apply_torque(Vector3(0, 1, 0)*turn_force)
+			if Input.is_action_pressed("move_right"):
+				apply_torque(Vector3(0, -1, 0)*turn_force)
+		
 		
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

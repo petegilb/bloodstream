@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://4pn1n18e51hx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vghy"]
+albedo_color = Color(0.647875, 0.135406, 0.128329, 1)
+
+[node name="CSGTube" type="CSGPolygon3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9686, 1.07616, 0)
+use_collision = true
+polygon = PackedVector2Array(10.4591, -4.72119, 10.1212, -5.4924, -13.3506, -5.57025, -11.9554, 1.02113, -9.64291, 6.34872, -3.90848, 10.028, 3.2174, 9.83755, 8.0407, 6.15276, 10.1047, 1.13012, 11.1219, -5.37717, 10.4217, -5.35855, 9.3034, 1.33266, 7.25296, 5.58722, 2.70341, 9.15771, -3.58612, 9.26671, -9.43355, 5.78484, -11.3326, 0.842364, -12.4741, -4.94303)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_1vghy")
