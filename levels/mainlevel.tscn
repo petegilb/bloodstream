@@ -77,4 +77,4 @@ curve = SubResource("Curve3D_a8rn8")
 [node name="Bloodstream" parent="BloodStreams/Path3D" instance=ExtResource("1_cxcq7")]
 
 [node name="BoatCharacter" parent="." instance=ExtResource("2_cxcq7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56039, 5.35726, 6.13036)
+transform = Transform3D(0.909374, 0, -0.415979, 0, 1, 0, 0.415979, 0, 0.909374, -1.1919, 2.20759, 3.03697)

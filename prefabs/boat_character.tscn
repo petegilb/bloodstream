@@ -1,14 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dodflpxwoog8b"]
+[gd_scene load_steps=5 format=3 uid="uid://dodflpxwoog8b"]
 
 [ext_resource type="ArrayMesh" uid="uid://cui5mvisw4qwp" path="res://models/boat_Boat.res" id="1_3sn2q"]
 [ext_resource type="Script" uid="uid://b61nwjvwmlja" path="res://scripts/boat.gd" id="1_tu7rq"]
+[ext_resource type="PackedScene" uid="uid://bwfg6r5pgwndu" path="res://prefabs/boat_probe.tscn" id="3_tgdca"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tu7rq"]
 points = PackedVector3Array(1.14894, 1.01494, 2.17147, -1.14894, 1.01494, 2.17147, 0, 0.936323, 3.13899, 1.14894, 0.305607, 2.17147, 1.14871, 0.980186, -2.77219, -1.14894, 0.305607, 2.17147, -1.14894, 0.980186, -2.77219, 0, 0.104807, 3.13899, 0.574469, 0.149463, 2.65523, 1.14871, 0.229267, -2.77219, -0.000224948, 0.936323, -2.94734, -0.574469, 0.149463, 2.65523, -1.14894, 0.229267, -2.77219, -0.574694, 0.935729, -2.85977, -0.000224948, 0.00341767, -2.93602, 0.574244, 0.0797571, -2.85857, -0.000224948, 0.138274, -2.94734, -0.574694, 0.0797571, -2.85857)
 
 [node name="BoatCharacter" type="RigidBody3D"]
-linear_damp = 1.0
-angular_damp = 2.0
 script = ExtResource("1_tu7rq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -19,8 +18,23 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_tu7rq")
 
 [node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55253, 0)
 
 [node name="CameraTilt" type="Node3D" parent="CameraPivot"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraTilt"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.210831, -6.8822)
+
+[node name="ProbeContainer" type="Node3D" parent="."]
+
+[node name="BoatProbe" parent="ProbeContainer" instance=ExtResource("3_tgdca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.95773, 2.16625)
+
+[node name="BoatProbe3" parent="ProbeContainer" instance=ExtResource("3_tgdca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.95773, -2.83375)
+
+[node name="BoatProbe4" parent="ProbeContainer" instance=ExtResource("3_tgdca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95773, -2.83375)
+
+[node name="BoatProbe6" parent="ProbeContainer" instance=ExtResource("3_tgdca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95773, 2.16625)

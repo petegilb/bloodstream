@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://bwfg6r5pgwndu"]
+[gd_scene load_steps=2 format=3 uid="uid://bwfg6r5pgwndu"]
+
+[ext_resource type="Script" uid="uid://qvptxyhyqwh6" path="res://prefabs/boat_probe.gd" id="1_owjeb"]
 
 [node name="BoatProbe" type="Node3D"]
+script = ExtResource("1_owjeb")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="WaterCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.5, 0)
 collision_mask = 2
