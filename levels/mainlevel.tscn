@@ -1,3 +1,80 @@
-[gd_scene format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=7 format=3 uid="uid://d3xnc4rwvnm06"]
+
+[ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
+[ext_resource type="PackedScene" uid="uid://dodflpxwoog8b" path="res://prefabs/boat_character.tscn" id="2_cxcq7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cxcq7"]
+sky_top_color = Color(0.829442, 0.196396, 0.264134, 1)
+sky_horizon_color = Color(0.681371, 0.51536, 0.523294, 1)
+ground_horizon_color = Color(0.681371, 0.51536, 0.523294, 1)
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_mlnnp"]
+sky_material = SubResource("ProceduralSkyMaterial_cxcq7")
+
+[sub_resource type="Environment" id="Environment_lh2t4"]
+background_mode = 2
+sky = SubResource("Sky_mlnnp")
+
+[sub_resource type="Curve3D" id="Curve3D_a8rn8"]
+_data = {
+"points": PackedVector3Array(7.03458, -0.315477, -33.5968, -7.03458, 0.315477, 33.5968, 12.7985, -1.63298, -8.11311, 6.39404, -7.38747, -23.9506, -6.39404, 7.38747, 23.9506, -113.339, -3.58766, 210.61, 13.0072, -15.8179, -48.8943, -13.0072, 15.8179, 48.8943, -115.333, -3.80044, 368.977, 0, 0, 0, 0, 0, 0, -69.8398, -11.2675, 497.785),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
 
 [node name="Mainlevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lh2t4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Organs" type="Node3D" parent="."]
+
+[node name="Brain" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33704, 0, 566.246)
+inner_radius = 42.0658
+outer_radius = 121.061
+
+[node name="Heart" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33704, -41.3247, 8.81529)
+inner_radius = 42.0658
+outer_radius = 121.061
+
+[node name="LeftLung" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 478.495, 0, 8.81529)
+inner_radius = 42.0658
+outer_radius = 121.061
+
+[node name="RightLung" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -498.109, 0, 8.81529)
+inner_radius = 42.0658
+outer_radius = 121.061
+
+[node name="Liver" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 211.456, 0, -367.414)
+inner_radius = 27.8221
+outer_radius = 86.876
+
+[node name="Stomach" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94.1033, 0, -508.006)
+inner_radius = 27.8221
+outer_radius = 86.876
+
+[node name="Spleen" type="CSGTorus3D" parent="Organs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -293.862, 0, -682.64)
+inner_radius = 27.8221
+outer_radius = 86.876
+
+[node name="BloodStreams" type="Node3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="BloodStreams"]
+curve = SubResource("Curve3D_a8rn8")
+
+[node name="Bloodstream" parent="BloodStreams/Path3D" instance=ExtResource("1_cxcq7")]
+
+[node name="BoatCharacter" parent="." instance=ExtResource("2_cxcq7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56039, 5.35726, 6.13036)
