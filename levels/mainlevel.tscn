@@ -103,21 +103,6 @@ distance_between_mesh = 12.535
 
 [node name="CSGTube2" parent="BloodStreams/River" instance=ExtResource("3_p5hok")]
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="BloodStreams/River"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.317, 0)
-visible = false
-polygon = PackedVector2Array(0.336373, 1.8816, 1.13684, 1.87207, 1.68002, 1.45278, 1.70861, 0.728546, 1.70861, -0.119568, -0.292566, -0.138626, -0.283038, 0.680901, -0.273508, 1.45278)
-depth = 3.4
-smooth_faces = true
-
-[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="BloodStreams/River"]
-transform = Transform3D(0.95922, 0, 0, 0, 0.95922, 0, 0, 0, 0.95922, -0.506038, 48.2799, 0.19668)
-visible = false
-operation = 2
-polygon = PackedVector2Array(0.336373, 1.8816, 1.13684, 1.87207, 1.68002, 1.45278, 1.70861, 0.728546, 1.70861, -0.119568, -0.292566, -0.138626, -0.283038, 0.680901, -0.273508, 1.45278)
-depth = 3.97
-smooth_faces = true
-
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="BloodStreams/River"]
 visible = false
 multimesh = SubResource("MultiMesh_cxcq7")
@@ -130,4 +115,3 @@ shape = SubResource("ConcavePolygonShape3D_natwr")
 
 [node name="BoatCharacter" parent="." instance=ExtResource("2_cxcq7")]
 transform = Transform3D(0.909374, 0, -0.415979, 0, 1, 0, 0.415979, 0, 0.909374, 0.676237, 0.213472, -2.42964)
-float_force = 2.0

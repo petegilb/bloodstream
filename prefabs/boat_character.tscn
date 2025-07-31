@@ -9,8 +9,10 @@ points = PackedVector3Array(1.14894, 1.01494, 2.17147, -1.14894, 1.01494, 2.1714
 
 [node name="BoatCharacter" type="RigidBody3D"]
 script = ExtResource("1_tu7rq")
-forward_row_force = 50
-backward_row_force = 25
+float_force = 2.0
+river_passive_force = 8
+forward_row_force = 30
+backward_row_force = 15
 turn_force = 10
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -21,12 +23,16 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_tu7rq")
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55253, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16611, -0.180041)
 
 [node name="CameraTilt" type="Node3D" parent="CameraPivot"]
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraTilt"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.210831, -6.8822)
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot/CameraTilt"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_mask = 256
+spring_length = 5.53
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/CameraTilt/SpringArm3D"]
 
 [node name="ProbeContainer" type="Node3D" parent="."]
 

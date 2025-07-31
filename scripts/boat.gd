@@ -43,7 +43,8 @@ func _physics_process(_delta: float) -> void:
 		# what happens if we're not in water lol
 		if p.in_water and depth > 0:
 			submerged = true
-			collision_object = p.collision_object.get_parent()
+			if p.collision_object:
+				collision_object = p.collision_object.get_parent()
 			var force = Vector3.UP * float_force * gravity * depth
 			apply_force(force, p.global_position - global_position)
 	

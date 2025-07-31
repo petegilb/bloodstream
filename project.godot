@@ -42,6 +42,7 @@ move_right={
 
 3d_physics/layer_1="World"
 3d_physics/layer_2="Water"
+3d_physics/layer_9="Camera"
 
 [rendering]
 

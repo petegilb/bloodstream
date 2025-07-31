@@ -8,12 +8,12 @@ render_priority = 0
 shader = ExtResource("1_s5yy5")
 shader_parameter/albedo_texture = ExtResource("2_417ru")
 shader_parameter/albedo_multiplier = Vector3(0.96, 0.135, 0.115)
-shader_parameter/scroll_speed = 1.0
+shader_parameter/scroll_speed = 1.5
 shader_parameter/scale = Vector2(0.5, 50)
 
 [node name="Bloodstream" type="CSGPolygon3D"]
 use_collision = true
-collision_layer = 2
+collision_layer = 258
 collision_mask = 0
 polygon = PackedVector2Array(-2.1237, -0.0146387, -2.10123, 0.0621848, 21.7251, 0.174108, 21.7069, -0.0169136)
 mode = 2

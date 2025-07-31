@@ -2,7 +2,7 @@ class_name BoatProbe
 
 extends Node3D
 
-@export var underneath_radius := 5
+@export var underneath_radius := 8
 
 var in_water = false
 var water_height = -100
