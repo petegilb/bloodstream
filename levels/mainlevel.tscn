@@ -123,19 +123,23 @@ shape = SubResource("SphereShape3D_054ed")
 
 [node name="BloodStreams" type="Node3D" parent="."]
 
-[node name="River" type="Path3D" parent="BloodStreams"]
+[node name="River" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
 curve = SubResource("Curve3D_a8rn8")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
+source_room = NodePath("../../Organs/HeartAtrium2/RoomBounds")
+destination_room = NodePath("../../Organs/HeartAtrium1/RoomBounds")
 
 [node name="Bloodstream" parent="BloodStreams/River" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River" instance=ExtResource("3_p5hok")]
 
-[node name="River2" type="Path3D" parent="BloodStreams"]
+[node name="River2" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
 curve = SubResource("Curve3D_5ng5q")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
+source_room = NodePath("../../Organs/HeartAtrium1/RoomBounds")
+destination_room = NodePath("../../Organs/HeartAtrium2/RoomBounds")
 
 [node name="Bloodstream" parent="BloodStreams/River2" instance=ExtResource("1_cxcq7")]
 

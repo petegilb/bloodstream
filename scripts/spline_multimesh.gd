@@ -1,4 +1,5 @@
 @tool
+class_name BloodRiver
 extends Path3D
 
 # sourced from https://github.com/CBerry22/Path-Based-Mesh-Generation-YT/blob/master/scenes/Track.gd
@@ -7,11 +8,18 @@ extends Path3D
 	set(value):
 		distance_between_mesh = value
 		is_dirty = true
+
+@export var source_room: RoomBounds = null
+@export var destination_room: RoomBounds = null
 	
 var is_dirty = false
 var multimesh_objects: Array[MultiMesh] = []
 
 func _ready():
+	if source_room == null:
+		printerr("spline is missing its source room bounds!! %s" % [self])
+	if destination_room == null:
+		printerr("spline is missing its destination room bounds!! %s" % [self])
 	for child in get_children():
 		if is_instance_of(child, MultiMesh):
 			multimesh_objects.append(child)
