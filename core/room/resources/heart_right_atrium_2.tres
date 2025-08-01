@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Room" load_steps=2 format=3 uid="uid://ber8hnw0u1a0t"]
+
+[ext_resource type="Script" uid="uid://badfjjeaxtp6d" path="res://core/room/room.gd" id="1_onha6"]
+
+[resource]
+script = ExtResource("1_onha6")
+room_name = "Heart Right Atrium 2"
+metadata/_custom_type_script = "uid://badfjjeaxtp6d"

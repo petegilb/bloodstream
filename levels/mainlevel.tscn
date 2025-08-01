@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=58 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -11,10 +11,21 @@
 [ext_resource type="PackedScene" uid="uid://cl163faksk3wu" path="res://prefabs/rooms/heart_atrium_1.tscn" id="5_054ed"]
 [ext_resource type="Resource" uid="uid://cf7jq4avjbpaw" path="res://core/room/resources/heart_left_atrium2.tres" id="5_lrn0d"]
 [ext_resource type="PackedScene" uid="uid://sg8pf44olgg3" path="res://prefabs/rooms/y_split.tscn" id="7_6fb81"]
+[ext_resource type="Resource" uid="uid://ch05x7gqjdkul" path="res://core/room/resources/heart_right_atrium_1.tres" id="7_lykvm"]
+[ext_resource type="Resource" uid="uid://ber8hnw0u1a0t" path="res://core/room/resources/heart_right_atrium_2.tres" id="8_ve5qb"]
+[ext_resource type="Resource" uid="uid://dyfqu7pyoqudu" path="res://core/room/resources/junction_1.tres" id="10_0qwx7"]
+[ext_resource type="Resource" uid="uid://br34c0lm30lx4" path="res://core/room/resources/junction_2.tres" id="11_o781n"]
 [ext_resource type="PackedScene" uid="uid://dckpreal6vvym" path="res://prefabs/rooms/stomach.tscn" id="12_dywq6"]
+[ext_resource type="Resource" uid="uid://cx7a8n020lbvq" path="res://core/room/resources/junction_3.tres" id="12_f7tet"]
+[ext_resource type="Resource" uid="uid://bd7vxqeibnrun" path="res://core/room/resources/junction_4.tres" id="13_lgm1e"]
 [ext_resource type="PackedScene" uid="uid://cb5ovu1vcbqeq" path="res://models/Liver.glb" id="13_y7cic"]
+[ext_resource type="Resource" uid="uid://bv153v07m61pn" path="res://core/room/resources/junction_5.tres" id="14_53c80"]
 [ext_resource type="PackedScene" uid="uid://bnq10128gwoo3" path="res://prefabs/rooms/LeftLung.tscn" id="14_g67e1"]
 [ext_resource type="PackedScene" uid="uid://dy1qxjotfiqfd" path="res://prefabs/rooms/RightLung.tscn" id="15_k78bo"]
+[ext_resource type="Resource" uid="uid://18i5h38cqwxc" path="res://core/room/resources/Stomach.tres" id="16_2cdw5"]
+[ext_resource type="Resource" uid="uid://cp4qn06gnar3v" path="res://core/room/resources/Liver.tres" id="18_g72rb"]
+[ext_resource type="Resource" uid="uid://qkxddydmavqr" path="res://core/room/resources/LeftLung.tres" id="20_37qta"]
+[ext_resource type="Resource" uid="uid://b8rg41gap72xv" path="res://core/room/resources/RightLung.tres" id="22_o44l1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cxcq7"]
 sky_top_color = Color(0.989204, 0.696157, 0.689012, 1)
@@ -39,6 +50,39 @@ radius = 78.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_054ed"]
 radius = 84.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k78bo"]
+radius = 72.6037
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ve5qb"]
+radius = 103.961
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0qwx7"]
+radius = 65.5038
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o781n"]
+radius = 78.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lgm1e"]
+radius = 78.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_53c80"]
+radius = 78.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2cdw5"]
+radius = 76.3627
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2cdw5"]
+size = Vector3(262.847, 106.662, 403.666)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g72rb"]
+size = Vector3(199.078, 86.9376, 473.996)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37qta"]
+size = Vector3(243.763, 70.2468, 481.104)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o44l1"]
+size = Vector3(242.134, 77.5025, 526.472)
 
 [sub_resource type="Curve3D" id="Curve3D_5ng5q"]
 _data = {
@@ -192,6 +236,13 @@ shadow_enabled = true
 omni_range = 94.3104
 omni_attenuation = 0.268
 
+[node name="RoomBounds" parent="Organs/RightHeartAtrium1" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("7_lykvm")
+
+[node name="CollisionShape3D" parent="Organs/RightHeartAtrium1/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0828, -12, -73.3239)
+shape = SubResource("SphereShape3D_k78bo")
+
 [node name="RightHeartAtrium2" parent="Organs" instance=ExtResource("3_6wtob")]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 213.448, -92, -391.802)
 
@@ -211,6 +262,13 @@ shadow_enabled = true
 omni_range = 108.0
 omni_attenuation = 0.268
 
+[node name="RoomBounds" parent="Organs/RightHeartAtrium2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("8_ve5qb")
+
+[node name="CollisionShape3D" parent="Organs/RightHeartAtrium2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74185, -12, 32.7311)
+shape = SubResource("SphereShape3D_ve5qb")
+
 [node name="YSplit" parent="Organs" instance=ExtResource("7_6fb81")]
 transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -205, 50, -89)
 
@@ -221,6 +279,13 @@ light_energy = 2.983
 shadow_enabled = true
 omni_range = 75.225
 omni_attenuation = 0.268
+
+[node name="RoomBounds" parent="Organs/YSplit" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("10_0qwx7")
+
+[node name="CollisionShape3D" parent="Organs/YSplit/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 3.44808, -0.154541, 12.6951)
+shape = SubResource("SphereShape3D_0qwx7")
 
 [node name="YSplit2" parent="Organs" instance=ExtResource("7_6fb81")]
 transform = Transform3D(0.952937, 0, -0.303168, 0, 1, 0, 0.303168, 0, 0.952937, -205, 50, -494.774)
@@ -233,6 +298,13 @@ shadow_enabled = true
 omni_range = 75.225
 omni_attenuation = 0.268
 
+[node name="RoomBounds" parent="Organs/YSplit2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("11_o781n")
+
+[node name="CollisionShape3D" parent="Organs/YSplit2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 3.60715, -12, 13.4293)
+shape = SubResource("SphereShape3D_o781n")
+
 [node name="YSplit3" parent="Organs" instance=ExtResource("7_6fb81")]
 transform = Transform3D(0.941264, 0, 0.33767, 0, 1, 0, -0.33767, 0, 0.941264, -312.605, 50, -727.994)
 
@@ -243,6 +315,13 @@ light_energy = 2.983
 shadow_enabled = true
 omni_range = 75.225
 omni_attenuation = 0.268
+
+[node name="RoomBounds" parent="Organs/YSplit3" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("12_f7tet")
+
+[node name="CollisionShape3D" parent="Organs/YSplit3/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46988, -12, 14.0128)
+shape = SubResource("SphereShape3D_lgm1e")
 
 [node name="YSplit4" parent="Organs" instance=ExtResource("7_6fb81")]
 transform = Transform3D(0.997061, 0, 0.0766146, 0, 1, 0, -0.0766146, 0, 0.997061, 674, -1.1771, -541.538)
@@ -255,6 +334,13 @@ shadow_enabled = true
 omni_range = 75.225
 omni_attenuation = 0.268
 
+[node name="RoomBounds" parent="Organs/YSplit4" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("13_lgm1e")
+
+[node name="CollisionShape3D" parent="Organs/YSplit4/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67828, 4.36163, 20.3005)
+shape = SubResource("SphereShape3D_53c80")
+
 [node name="YSplit5" parent="Organs" instance=ExtResource("7_6fb81")]
 transform = Transform3D(-0.997061, 0, -0.0766145, 0, 1, 0, 0.0766145, 0, -0.997061, 217.642, -71.9366, -77.4072)
 
@@ -265,6 +351,13 @@ light_energy = 2.983
 shadow_enabled = true
 omni_range = 75.225
 omni_attenuation = 0.268
+
+[node name="RoomBounds" parent="Organs/YSplit5" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("14_53c80")
+
+[node name="CollisionShape3D" parent="Organs/YSplit5/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93109, -12, 28.0147)
+shape = SubResource("SphereShape3D_2cdw5")
 
 [node name="Stomach2" parent="Organs" instance=ExtResource("12_dywq6")]
 transform = Transform3D(-0.686859, 0, 0.72679, 0, 1, 0, -0.72679, 0, -0.686859, 4.65323, 31.2186, -758.595)
@@ -285,6 +378,13 @@ shadow_enabled = true
 omni_range = 107.327
 omni_attenuation = 0.256
 
+[node name="RoomBounds" parent="Organs/Stomach2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("16_2cdw5")
+
+[node name="CollisionShape3D" parent="Organs/Stomach2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.4846, -16.9545, 63.4269)
+shape = SubResource("BoxShape3D_2cdw5")
+
 [node name="Liver2" parent="Organs" instance=ExtResource("13_y7cic")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 389.663, -11.8636, -875.07)
 
@@ -295,6 +395,13 @@ light_energy = 3.679
 shadow_enabled = true
 omni_range = 187.141
 omni_attenuation = 0.256
+
+[node name="RoomBounds" parent="Organs/Liver2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("18_g72rb")
+
+[node name="CollisionShape3D" parent="Organs/Liver2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.4637, 6.46881, 157.806)
+shape = SubResource("BoxShape3D_g72rb")
 
 [node name="LeftLung2" parent="Organs" instance=ExtResource("14_g67e1")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -82.5421, -25.1506, 159.995)
@@ -315,6 +422,13 @@ shadow_enabled = true
 omni_range = 174.919
 omni_attenuation = 0.268
 
+[node name="RoomBounds" parent="Organs/LeftLung2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("20_37qta")
+
+[node name="CollisionShape3D" parent="Organs/LeftLung2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(-0.964875, 0, -0.262711, 0, 1, 0, 0.262711, 0, -0.964875, 43.3241, 8.70105, -91.2681)
+shape = SubResource("BoxShape3D_37qta")
+
 [node name="RightLung2" parent="Organs" instance=ExtResource("15_k78bo")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 407.221, -25.1506, 170.995)
 
@@ -333,6 +447,13 @@ light_energy = 2.983
 shadow_enabled = true
 omni_range = 174.919
 omni_attenuation = 0.268
+
+[node name="RoomBounds" parent="Organs/RightLung2" instance=ExtResource("4_lrn0d")]
+room_resource = ExtResource("22_o44l1")
+
+[node name="CollisionShape3D" parent="Organs/RightLung2/RoomBounds/Area3D" index="0"]
+transform = Transform3D(0.979652, 0, -0.200702, 0, 1, 0, 0.200702, 0, 0.979652, -9.35022, 11.4022, -92.0182)
+shape = SubResource("BoxShape3D_o44l1")
 
 [node name="BloodStreams" type="Node3D" parent="."]
 
@@ -532,3 +653,14 @@ omni_attenuation = 0.268
 
 [editable path="Organs/LeftHeartAtrium1/RoomBounds"]
 [editable path="Organs/LeftHeartAtrium2/RoomBounds"]
+[editable path="Organs/RightHeartAtrium1/RoomBounds"]
+[editable path="Organs/RightHeartAtrium2/RoomBounds"]
+[editable path="Organs/YSplit/RoomBounds"]
+[editable path="Organs/YSplit2/RoomBounds"]
+[editable path="Organs/YSplit3/RoomBounds"]
+[editable path="Organs/YSplit4/RoomBounds"]
+[editable path="Organs/YSplit5/RoomBounds"]
+[editable path="Organs/Stomach2/RoomBounds"]
+[editable path="Organs/Liver2/RoomBounds"]
+[editable path="Organs/LeftLung2/RoomBounds"]
+[editable path="Organs/RightLung2/RoomBounds"]

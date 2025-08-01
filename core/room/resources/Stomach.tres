@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Room" load_steps=2 format=3 uid="uid://18i5h38cqwxc"]
+
+[ext_resource type="Script" uid="uid://badfjjeaxtp6d" path="res://core/room/room.gd" id="1_fqr5n"]
+
+[resource]
+script = ExtResource("1_fqr5n")
+room_name = "Stomach"
+metadata/_custom_type_script = "uid://badfjjeaxtp6d"
