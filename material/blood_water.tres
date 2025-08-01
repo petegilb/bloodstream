@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://buv0thsvwaod4"]
+
+[ext_resource type="Shader" uid="uid://cqjal2e1au8va" path="res://material/blood_water.gdshader" id="1_nf77g"]
+[ext_resource type="Texture2D" uid="uid://dr6wsi6x5cln4" path="res://prefabs/river/light_water.jpg" id="2_6n2bu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nf77g")
+shader_parameter/albedo_texture = ExtResource("2_6n2bu")
+shader_parameter/albedo_multiplier = Vector3(0.96, 0.135, 0.115)
+shader_parameter/scroll_speed_1 = Vector2(0.05, 0)
+shader_parameter/scroll_speed_2 = Vector2(-0.03, 0)
+shader_parameter/scale = Vector2(10, 10)
+shader_parameter/scale2 = Vector2(6.885, 10)
+shader_parameter/blend_factor = 0.5
