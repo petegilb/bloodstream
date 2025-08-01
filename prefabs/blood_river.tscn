@@ -12,19 +12,21 @@ shader_parameter/scroll_speed = 1.5
 shader_parameter/scale = Vector2(0.5, 50)
 
 [node name="Bloodstream" type="CSGPolygon3D"]
+cast_shadow = 0
 use_collision = true
 collision_layer = 258
 collision_mask = 0
-polygon = PackedVector2Array(-1.61368, -0.848351, -1.59901, 0.074201, 20.3714, 0.166922, 20.4393, -0.908817)
+polygon = PackedVector2Array(-0.53026, -0.549013, -0.422497, -0.0183006, 22.0627, -0.023013, 22.3201, -0.677309)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 0.8
 path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
+path_rotation = 1
+path_rotation_accurate = true
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+smooth_faces = true
 material = SubResource("ShaderMaterial_6l012")

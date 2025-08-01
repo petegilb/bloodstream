@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://du0wq3ta6hm3r"]
+
+[ext_resource type="Script" uid="uid://bw27ux368ukf3" path="res://core/room/overlap/room_bounds.gd" id="1_ydrnb"]
+[ext_resource type="Resource" uid="uid://cvvcwp65v0xhm" path="res://core/room/resources/heart_left_atrium1.tres" id="2_jceg8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ydrnb"]
+radius = 78.0
+
+[node name="RoomBounds" type="Node3D"]
+script = ExtResource("1_ydrnb")
+room_resource = ExtResource("2_jceg8")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, -12, -20)
+shape = SubResource("SphereShape3D_ydrnb")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

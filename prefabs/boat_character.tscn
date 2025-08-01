@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95773, -2.83375)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95773, 2.16625)
 
 [node name="BoatProbe7" parent="ProbeContainer" instance=ExtResource("3_tgdca")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0141163, 1.71269, 3.15408)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0141163, 1.09836, 3.15408)
 
 [node name="BoatHull" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_5n8li")
