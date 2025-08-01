@@ -1,4 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bnipdk3s5xj7w"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bnipdk3s5xj7w"]
+
+[ext_resource type="Texture2D" uid="uid://bmjykphk74bpd" path="res://prefabs/river/Vein 2 - 512x512.png" id="1_yrfhc"]
 
 [resource]
-albedo_color = Color(0.647875, 0.135406, 0.128329, 1)
+albedo_color = Color(0.99, 0.2112, 0.198, 1)
+albedo_texture = ExtResource("1_yrfhc")
+uv1_scale = Vector3(0.04, 0.04, 0.04)
+uv1_triplanar = true
+uv1_world_triplanar = true

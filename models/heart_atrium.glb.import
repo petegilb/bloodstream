@@ -33,6 +33,16 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
+"materials": {
+"BloodWater": {
+"use_external/enabled": true,
+"use_external/path": "uid://buv0thsvwaod4"
+},
+"HeartAtrium": {
+"use_external/enabled": true,
+"use_external/path": "uid://bnipdk3s5xj7w"
+}
+},
 "meshes": {
 "heart_atrium_HeartAtrium1": {
 "generate/lightmap_uv": 0,
