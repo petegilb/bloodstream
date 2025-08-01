@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix;
+//render_mode blend_mix;
 
 uniform sampler2D albedo_texture;
 uniform vec3 albedo_multiplier = vec3(.96, .135, .115);
@@ -14,5 +14,7 @@ void fragment() {
 
     vec4 tex = texture(albedo_texture, uv);
     ALBEDO = tex.rgb * albedo_multiplier;
-    ALPHA = .99;
+    ALPHA = .9;
+	METALLIC = 0.0;
+    ROUGHNESS = 1.0;
 }

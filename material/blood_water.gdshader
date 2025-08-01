@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix;
+//render_mode blend_mix;
 
 uniform sampler2D albedo_texture;
 uniform vec3 albedo_multiplier = vec3(.96, .135, .115);
