@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dodflpxwoog8b"]
+[gd_scene load_steps=9 format=3 uid="uid://dodflpxwoog8b"]
 
 [ext_resource type="ArrayMesh" uid="uid://cui5mvisw4qwp" path="res://models/boat_Boat.res" id="1_3sn2q"]
 [ext_resource type="Script" uid="uid://b61nwjvwmlja" path="res://scripts/boat.gd" id="1_tu7rq"]
 [ext_resource type="PackedScene" uid="uid://bwfg6r5pgwndu" path="res://prefabs/boat_probe.tscn" id="3_tgdca"]
 [ext_resource type="ArrayMesh" uid="uid://caqpnmf8cpvpk" path="res://models/boat_inside_BoatInside.res" id="5_5n8li"]
 [ext_resource type="Shader" uid="uid://c7qctejcp32j3" path="res://material/boat_hull.gdshader" id="5_nocbj"]
+[ext_resource type="ArrayMesh" uid="uid://c1ph2bcrrix34" path="res://models/arrow_Arrow.res" id="6_nocbj"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tu7rq"]
 points = PackedVector3Array(1.14894, 1.01494, 2.17147, -1.14894, 1.01494, 2.17147, 0, 0.936323, 3.13899, 1.14894, 0.305607, 2.17147, 1.14871, 0.980186, -2.77219, -1.14894, 0.305607, 2.17147, -1.14894, 0.980186, -2.77219, 0, 0.104807, 3.13899, 0.574469, 0.149463, 2.65523, 1.14871, 0.229267, -2.77219, -0.000224948, 0.936323, -2.94734, -0.574469, 0.149463, 2.65523, -1.14894, 0.229267, -2.77219, -0.574694, 0.935729, -2.85977, -0.000224948, 0.00341767, -2.93602, 0.574244, 0.0797571, -2.85857, -0.000224948, 0.138274, -2.94734, -0.574694, 0.0797571, -2.85857)
@@ -60,3 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0141163, 1.09836, 3.15408)
 [node name="BoatHull" type="MeshInstance3D" parent="."]
 mesh = ExtResource("5_5n8li")
 surface_material_override/0 = SubResource("ShaderMaterial_7mxg7")
+
+[node name="Arrow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7515, -0.395316)
+mesh = ExtResource("6_nocbj")

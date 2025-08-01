@@ -12,6 +12,7 @@ extends RigidBody3D
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
+@onready var arrow := $Arrow
 
 var submerged = false
 
