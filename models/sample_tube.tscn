@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dww2ogq825tq5"]
+
+[ext_resource type="ArrayMesh" uid="uid://dciow4s5h8eg6" path="res://models/sample_tube.tres" id="1_ri75f"]
+
+[node name="SampleTube" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ri75f")

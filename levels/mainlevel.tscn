@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=19 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://du0wq3ta6hm3r" path="res://core/room/overlap/room_bounds.tscn" id="4_lrn0d"]
 [ext_resource type="PackedScene" uid="uid://cl163faksk3wu" path="res://prefabs/rooms/heart_atrium_1.tscn" id="5_054ed"]
 [ext_resource type="Resource" uid="uid://cf7jq4avjbpaw" path="res://core/room/resources/heart_left_atrium2.tres" id="5_lrn0d"]
+[ext_resource type="PackedScene" uid="uid://sg8pf44olgg3" path="res://prefabs/rooms/y_split.tscn" id="7_6fb81"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cxcq7"]
 sky_top_color = Color(0.989204, 0.696157, 0.689012, 1)
@@ -37,10 +38,17 @@ radius = 114.0
 
 [sub_resource type="Curve3D" id="Curve3D_5ng5q"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 8, -38, -128, 6, -6, 17, -6, 6, -17, 7, -25, -179, 0, 0, 0, 0, 0, 0, 16, -41, -239),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 8, -38, -128, 3, -11, 35, -3, 11, -35, 7, -25, -179, 0, 0, 0, 0, 0, 0, 15.1772, -41.707, -253.891),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_054ed"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 110, -45, -246, 0, 0, 0, 0, 0, 0, 139, -12, -157, 7, 0, -41, -7, 0, 41, 181, 17, -38, 42, -6, 37, -42, 6, -37, 42, 55, 34, 25.1343, 16.421, 8.91157, -25.1343, -16.421, -8.91157, -128.758, 43.1213, -29.7189),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Mainlevel" type="Node3D"]
 script = ExtResource("1_natwr")
@@ -114,6 +122,17 @@ room_resource = ExtResource("5_lrn0d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.62939e-06, -12, 23)
 shape = SubResource("SphereShape3D_054ed")
 
+[node name="YSplit" parent="Organs" instance=ExtResource("7_6fb81")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -205, 50, -89)
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Organs/YSplit"]
+transform = Transform3D(0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, 0.5, 8.13396, 3, 16.0885)
+light_color = Color(1, 0.28, 0.28, 1)
+light_energy = 2.983
+shadow_enabled = true
+omni_range = 75.225
+omni_attenuation = 0.268
+
 [node name="BloodStreams" type="Node3D" parent="."]
 
 [node name="River2" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
@@ -126,7 +145,17 @@ destination_room = NodePath("../../Organs/HeartAtrium2/RoomBounds")
 [node name="Bloodstream" parent="BloodStreams/River2" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River2" instance=ExtResource("3_p5hok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0314, 2.38897, 0)
+
+[node name="River3" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+curve = SubResource("Curve3D_054ed")
+script = ExtResource("1_mlnnp")
+distance_between_mesh = 12.535
+source_room = NodePath("../../Organs/HeartAtrium1/RoomBounds")
+destination_room = NodePath("../../Organs/HeartAtrium2/RoomBounds")
+
+[node name="Bloodstream" parent="BloodStreams/River3" instance=ExtResource("1_cxcq7")]
+
+[node name="CSGTube2" parent="BloodStreams/River3" instance=ExtResource("3_p5hok")]
 
 [node name="BoatCharacter" parent="." instance=ExtResource("2_cxcq7")]
 transform = Transform3D(0.909374, 0, -0.415979, 0, 1, 0, 0.415979, 0, 0.909374, 17.2296, -29.7348, -81.8421)
