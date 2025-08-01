@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DeliveryList" load_steps=4 format=3 uid="uid://22on6yihggnc"]
+
+[ext_resource type="Script" uid="uid://dbviuhbqqmug3" path="res://core/delivery/delivery.gd" id="1_2fa35"]
+[ext_resource type="Resource" uid="uid://cf37n60klsmkw" path="res://core/delivery/resources/delivery1.tres" id="2_bp8vs"]
+[ext_resource type="Script" uid="uid://keha5wfk4r6c" path="res://core/delivery/delivery_list.gd" id="2_ydlgg"]
+
+[resource]
+script = ExtResource("2_ydlgg")
+delivery_list = Array[ExtResource("1_2fa35")]([ExtResource("2_bp8vs")])
+metadata/_custom_type_script = "uid://keha5wfk4r6c"

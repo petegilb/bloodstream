@@ -1,3 +1,4 @@
+class_name BoatCharacter
 extends RigidBody3D
 
 @export var float_force := 1.0
@@ -10,6 +11,7 @@ extends RigidBody3D
 @export var turn_force := 2
 @export var depth_bias := .5
 @export var non_submerged_movement_modifer := .4
+@export var arrow_lerp_speed := 5.0
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -29,7 +31,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and mouse_movement != Vector2():
 		$CameraPivot.rotation_degrees.y += -mouse_movement.x
 		$CameraPivot/CameraTilt.rotation_degrees.x += mouse_movement.y
@@ -86,6 +88,21 @@ func _physics_process(_delta: float) -> void:
 				apply_torque(Vector3(0, 1, 0)*turn_force)
 			if Input.is_action_pressed("move_right"):
 				apply_torque(Vector3(0, -1, 0)*turn_force)
+
+	if GameManager._current_delivery != null and GameManager._current_delivery.delivery_status != GameManager.DELIVERY_STATUS.DELIVERED:
+		# update arrow position
+		if len(GameManager.shortest_path_arr) > 1:
+			arrow.visible = true
+			var target_node = GameManager.room_to_bounds.get(GameManager.room_name_to_resource.get(GameManager.shortest_path_arr[1]))
+			# print(target_node, target_node.global_position)
+			if target_node != null:
+				var direction = (target_node.global_position - arrow.global_position).normalized()
+				var target_basis = Basis.looking_at(direction, Vector3.UP)
+				arrow.global_transform.basis = arrow.global_transform.basis.slerp(target_basis, delta * arrow_lerp_speed)
+		else:
+			arrow.visible = false
+	else:
+		arrow.visible = false
 		
 		
 

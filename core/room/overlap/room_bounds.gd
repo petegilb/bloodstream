@@ -11,11 +11,13 @@ func _ready() -> void:
 
 # func _physics_process(_delta: float) -> void:
 
-func _on_area_3d_body_entered(_body:Node3D) -> void:
-    GameManager.set_current_room(self)
+func _on_area_3d_body_entered(body:Node3D) -> void:
+    if body is BoatCharacter:
+        GameManager.set_current_room(self)
 
-func _on_area_3d_body_exited(_body:Node3D) -> void:
-    GameManager.set_current_room(null)
+func _on_area_3d_body_exited(body:Node3D) -> void:
+    if body is BoatCharacter:
+        GameManager.set_current_room(null)
 
 func _to_string() -> String:
     return room_resource._to_string()

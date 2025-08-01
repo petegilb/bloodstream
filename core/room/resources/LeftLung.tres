@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_3npl7")
-room_name = "Right Lung"
+room_name = "Left Lung"
 metadata/_custom_type_script = "uid://badfjjeaxtp6d"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=59 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -26,6 +26,7 @@
 [ext_resource type="Resource" uid="uid://cp4qn06gnar3v" path="res://core/room/resources/Liver.tres" id="18_g72rb"]
 [ext_resource type="Resource" uid="uid://qkxddydmavqr" path="res://core/room/resources/LeftLung.tres" id="20_37qta"]
 [ext_resource type="Resource" uid="uid://b8rg41gap72xv" path="res://core/room/resources/RightLung.tres" id="22_o44l1"]
+[ext_resource type="Resource" uid="uid://cvvcwp65v0xhm" path="res://core/room/resources/heart_left_atrium1.tres" id="24_dq5wx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cxcq7"]
 sky_top_color = Color(0.989204, 0.696157, 0.689012, 1)
@@ -457,166 +458,166 @@ shape = SubResource("BoxShape3D_o44l1")
 
 [node name="BloodStreams" type="Node3D" parent="."]
 
-[node name="River2" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River2" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_5ng5q")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("24_dq5wx")
+destination_room = ExtResource("5_lrn0d")
 
 [node name="Bloodstream" parent="BloodStreams/River2" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River2" instance=ExtResource("3_p5hok")]
 
-[node name="River3" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River3" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_054ed")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("5_lrn0d")
+destination_room = ExtResource("10_0qwx7")
 
 [node name="Bloodstream" parent="BloodStreams/River3" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River3" instance=ExtResource("3_p5hok")]
 
-[node name="River4" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River4" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_6fb81")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("10_0qwx7")
+destination_room = ExtResource("11_o781n")
 
 [node name="Bloodstream" parent="BloodStreams/River4" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River4" instance=ExtResource("3_p5hok")]
 
-[node name="River5" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River5" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_dywq6")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("11_o781n")
+destination_room = ExtResource("16_2cdw5")
 
 [node name="Bloodstream" parent="BloodStreams/River5" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River5" instance=ExtResource("3_p5hok")]
 
-[node name="River6" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River6" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_y7cic")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("11_o781n")
+destination_room = ExtResource("12_f7tet")
 
 [node name="Bloodstream" parent="BloodStreams/River6" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River6" instance=ExtResource("3_p5hok")]
 
-[node name="River7" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River7" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_g67e1")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("12_f7tet")
+destination_room = ExtResource("18_g72rb")
 
 [node name="Bloodstream" parent="BloodStreams/River7" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River7" instance=ExtResource("3_p5hok")]
 
-[node name="River8" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River8" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_k78bo")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("16_2cdw5")
+destination_room = ExtResource("18_g72rb")
 
 [node name="Bloodstream" parent="BloodStreams/River8" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River8" instance=ExtResource("3_p5hok")]
 
-[node name="River9" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River9" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_lykvm")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("18_g72rb")
+destination_room = ExtResource("13_lgm1e")
 
 [node name="Bloodstream" parent="BloodStreams/River9" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River9" instance=ExtResource("3_p5hok")]
 
-[node name="River10" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River10" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_ve5qb")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("13_lgm1e")
+destination_room = ExtResource("7_lykvm")
 
 [node name="Bloodstream" parent="BloodStreams/River10" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River10" instance=ExtResource("3_p5hok")]
 
-[node name="River11" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River11" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_0qwx7")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("7_lykvm")
+destination_room = ExtResource("8_ve5qb")
 
 [node name="Bloodstream" parent="BloodStreams/River11" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River11" instance=ExtResource("3_p5hok")]
 
-[node name="River12" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River12" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_o781n")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("8_ve5qb")
+destination_room = ExtResource("14_53c80")
 
 [node name="Bloodstream" parent="BloodStreams/River12" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River12" instance=ExtResource("3_p5hok")]
 
-[node name="River13" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River13" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_f7tet")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("14_53c80")
+destination_room = ExtResource("22_o44l1")
 
 [node name="Bloodstream" parent="BloodStreams/River13" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River13" instance=ExtResource("3_p5hok")]
 
-[node name="River14" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River14" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_lgm1e")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("14_53c80")
+destination_room = ExtResource("20_37qta")
 
 [node name="Bloodstream" parent="BloodStreams/River14" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River14" instance=ExtResource("3_p5hok")]
 
-[node name="River15" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River15" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_53c80")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("20_37qta")
+destination_room = ExtResource("24_dq5wx")
 
 [node name="Bloodstream" parent="BloodStreams/River15" instance=ExtResource("1_cxcq7")]
 
 [node name="CSGTube2" parent="BloodStreams/River15" instance=ExtResource("3_p5hok")]
 
-[node name="River16" type="Path3D" parent="BloodStreams" node_paths=PackedStringArray("source_room", "destination_room")]
+[node name="River16" type="Path3D" parent="BloodStreams"]
 curve = SubResource("Curve3D_2cdw5")
 script = ExtResource("1_mlnnp")
 distance_between_mesh = 12.535
-source_room = NodePath("../../Organs/LeftHeartAtrium1/RoomBounds")
-destination_room = NodePath("../../Organs/LeftHeartAtrium2/RoomBounds")
+source_room = ExtResource("22_o44l1")
+destination_room = ExtResource("24_dq5wx")
 
 [node name="Bloodstream" parent="BloodStreams/River16" instance=ExtResource("1_cxcq7")]
 

@@ -9,17 +9,17 @@ extends Path3D
 		distance_between_mesh = value
 		is_dirty = true
 
-@export var source_room: RoomBounds = null
-@export var destination_room: RoomBounds = null
+@export var source_room: Room = null
+@export var destination_room: Room = null
 	
 var is_dirty = false
 var multimesh_objects: Array[MultiMesh] = []
 
 func _ready():
 	if source_room == null:
-		printerr("spline is missing its source room bounds!! %s" % [self])
+		printerr("spline is missing its source room!! %s" % [self])
 	if destination_room == null:
-		printerr("spline is missing its destination room bounds!! %s" % [self])
+		printerr("spline is missing its destination room!! %s" % [self])
 	for child in get_children():
 		if is_instance_of(child, MultiMesh):
 			multimesh_objects.append(child)
