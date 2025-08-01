@@ -11,11 +11,19 @@ var collision_object = null
 
 func _physics_process(_delta: float) -> void:
     # water_height = 0
-    in_water = $WaterCast.is_colliding() || check_underneath()
+    in_water = $WaterCast.is_colliding() || $UpWaterCast.is_colliding() # || check_underneath()
     if in_water:
-        last_collision = $WaterCast.get_collision_point()
-        water_height = last_collision.y
-        if $WaterCast.is_colliding():
+        # last_collision = $WaterCast.get_collision_point()
+        # water_height = last_collision.y
+        if $UpWaterCast.is_colliding():
+            last_collision = $UpWaterCast.get_collision_point()
+            water_height = last_collision.y
+            var possible_collision = $WaterCast.get_collider()
+            if possible_collision != null:
+                collision_object = possible_collision
+        elif $WaterCast.is_colliding():
+            last_collision = $WaterCast.get_collision_point()
+            water_height = last_collision.y
             var possible_collision = $WaterCast.get_collider()
             if possible_collision != null:
                 collision_object = possible_collision

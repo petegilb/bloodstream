@@ -9,6 +9,7 @@ extends RigidBody3D
 @export var backward_row_force := 10
 @export var turn_force := 2
 @export var depth_bias := .5
+@export var non_submerged_movement_modifer := .4
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -61,6 +62,21 @@ func _physics_process(_delta: float) -> void:
 			apply_central_force(global_transform.basis.z*forward_row_force)
 		if Input.is_action_pressed("move_backward"):
 			apply_central_force(-global_transform.basis.z*forward_row_force)
+			if Input.is_action_pressed("move_left"):
+				apply_torque(Vector3(0, -1, 0)*turn_force)
+			if Input.is_action_pressed("move_right"):
+				apply_torque(Vector3(0, 1, 0)*turn_force)
+		else:
+			if Input.is_action_pressed("move_left"):
+				apply_torque(Vector3(0, 1, 0)*turn_force)
+			if Input.is_action_pressed("move_right"):
+				apply_torque(Vector3(0, -1, 0)*turn_force)
+	else:
+		# allow moving outside of water just in case (it's weaker than normal)
+		if Input.is_action_pressed("move_forward"):
+			apply_central_force(global_transform.basis.z*forward_row_force * non_submerged_movement_modifer)
+		if Input.is_action_pressed("move_backward"):
+			apply_central_force(-global_transform.basis.z*forward_row_force * non_submerged_movement_modifer)
 			if Input.is_action_pressed("move_left"):
 				apply_torque(Vector3(0, -1, 0)*turn_force)
 			if Input.is_action_pressed("move_right"):
