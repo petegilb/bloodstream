@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://biywk3ehfgyhl"]
+
+[ext_resource type="ArrayMesh" uid="uid://dopwand2wb3xn" path="res://models/cells/cells_Virus.res" id="1_4i4xg"]
+
+[node name="Virus" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_4i4xg")

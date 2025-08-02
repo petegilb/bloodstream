@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://baia7lna51iit"]
+
+[ext_resource type="Shader" uid="uid://dgv7ulbv71d8l" path="res://material/virus.gdshader" id="1_l5imc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_l5imc")
+shader_parameter/albedo = Color(0.563607, 0.68, 0.1428, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
