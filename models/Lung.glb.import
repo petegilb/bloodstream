@@ -52,6 +52,14 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/path": "res://models/organs/Lung_LeftLung.res"
 },
+"Lung_LeftLungWater_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/organs/Lung_LeftLungWater_001.res"
+},
 "Lung_RightLung": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -59,6 +67,14 @@ _subresources={
 "lods/normal_merge_angle": 60.0,
 "save_to_file/enabled": true,
 "save_to_file/path": "res://models/organs/Lung_RightLung.res"
+},
+"Lung_RightLungWater_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://models/organs/Lung_RightLungWater_001.res"
 }
 }
 }

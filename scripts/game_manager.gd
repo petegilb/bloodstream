@@ -5,6 +5,7 @@ enum DELIVERY_TYPE {OXYGEN, C02, OTHER = -1}
 
 var _current_room: RoomBounds = null
 var _current_delivery: Delivery = null
+var _completed_deliveries := 0
 
 var main_scene: Node3D = null
 var gui: Gui = null
@@ -53,6 +54,8 @@ func _process(_delta: float) -> void:
     
     if _current_delivery == null:
         set_current_delivery(get_next_delivery())
+    else:
+        gui.delivery_status.text = DELIVERY_STATUS.keys()[_current_delivery.delivery_status]
 
 func get_next_delivery() -> Delivery:
     var delivery_list_arr := delivery_list.delivery_list
@@ -66,17 +69,44 @@ func update_shortest_path():
         elif _current_delivery.delivery_status == DELIVERY_STATUS.RETRIEVED:
             shortest_path_arr = dijkstra(map_graph, str(_current_room), str(_current_delivery.destination))
 
-func set_current_room(new_room) -> void:
+func set_current_room(new_room: RoomBounds) -> void:
     if new_room != _current_room:
         print("Room changed to %s" % [str(new_room)])
         _current_room = new_room
         if _current_room != null:
             gui.set_current_room_label(str(_current_room.room_resource))
             update_shortest_path()
+            update_delivery_status()
         else:
             gui.set_current_room_label('Veins')
         
         # TODO temporarily update delivery here until we have a better way
+
+func update_delivery_status():
+    if not _current_delivery:
+        return
+
+    var past_delivery: Delivery = _current_delivery.duplicate(true)
+
+    if _current_delivery.delivery_status == DELIVERY_STATUS.STARTED:
+        if str(_current_room.room_resource) == str(_current_delivery.source):
+            # TODO make a fading message that displays on screen here
+            _current_delivery.delivery_status = DELIVERY_STATUS.RETRIEVED
+            gui.set_next_location_label(str(_current_delivery.destination))
+            return
+    elif _current_delivery.delivery_status == DELIVERY_STATUS.RETRIEVED:
+        if str(_current_room.room_resource) == str(_current_delivery.destination):
+            _current_delivery.delivery_status = DELIVERY_STATUS.DELIVERED
+            # TODO make a timer here that sets it to null after a few seconds instead of immediately
+            _completed_deliveries += 1
+            # update gui completed deliveries
+            gui.completed_deliveries.text = str(_completed_deliveries)
+
+            # set current delivery to none
+            set_current_delivery(null)
+
+    if _current_delivery != null and past_delivery.delivery_status != _current_delivery.delivery_status:
+        print("Delivery Status updated to %s" % [str(DELIVERY_STATUS.keys()[_current_delivery.delivery_status])])
 
 func set_current_delivery(new_delivery) -> void:
     if new_delivery != _current_delivery:
@@ -85,9 +115,13 @@ func set_current_delivery(new_delivery) -> void:
 
         # TODO make a signal for delivery update or something? 
         # where should i update deliveries?
-        gui.set_next_location_label(str(_current_delivery.source))
-        gui.set_current_mission_label(str(_current_delivery))
-        update_shortest_path()
+        if _current_delivery != null:
+            gui.set_next_location_label(str(_current_delivery.source))
+            gui.set_current_mission_label(str(_current_delivery))
+            update_shortest_path()
+        else:
+            gui.set_next_location_label("None")
+            gui.set_current_mission_label("Wait for next assignment")
 
 # asked a certain chat website for assistance in writing this
 static func dijkstra(graph: Dictionary, start: String, goal: String) -> Array:

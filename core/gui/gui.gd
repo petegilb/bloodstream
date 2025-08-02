@@ -4,6 +4,8 @@ extends Control
 @onready var current_room_label = $MarginContainer/VBoxContainer/HBoxContainer/CurrentRoom
 @onready var current_mission_label = $MarginContainer2/VBoxContainer/HBoxContainer2/CurrentMission
 @onready var next_location_label = $MarginContainer2/VBoxContainer/HBoxContainer/NextLocation
+@onready var completed_deliveries = $MarginContainer/VBoxContainer/HBoxContainer2/CompletedDeliveries
+@onready var delivery_status = $MarginContainer3/VBoxContainer/HBoxContainer/DeliveryStatus
 
 func set_current_room_label(new_text: String) -> void:
     current_room_label.text = new_text
