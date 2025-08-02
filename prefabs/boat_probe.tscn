@@ -10,5 +10,10 @@ target_position = Vector3(0, -0.5, 0)
 collision_mask = 2
 
 [node name="UpWaterCast" type="RayCast3D" parent="."]
-target_position = Vector3(0, 5, 0)
+target_position = Vector3(0, 10, 0)
 collision_mask = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="UpWaterCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+visible = false
+size = Vector3(0.25, 10, 0.254)

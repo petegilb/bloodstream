@@ -9,22 +9,33 @@ var water_height = -100
 var last_collision = Vector3(0, water_height, 0)
 var collision_object = null
 
+@onready var up_water_cast = $UpWaterCast
+@onready var water_cast = $WaterCast
+
 func _physics_process(_delta: float) -> void:
+    # force up water cast to point up:
+    var up = Vector3.UP
+    var forward = -up_water_cast.global_transform.basis.z.normalized() # Keep the same forward direction
+    var new_basis = Basis.looking_at(forward, up)
+    up_water_cast.global_transform.basis = new_basis
+
     # water_height = 0
-    in_water = $WaterCast.is_colliding() || $UpWaterCast.is_colliding() # || check_underneath()
+    in_water = water_cast.is_colliding() || up_water_cast.is_colliding() # || check_underneath()
     if in_water:
         # last_collision = $WaterCast.get_collision_point()
         # water_height = last_collision.y
-        if $UpWaterCast.is_colliding():
-            last_collision = $UpWaterCast.get_collision_point()
+        if up_water_cast.is_colliding():
+            # print('upward collision %s' % [self])
+            last_collision = up_water_cast.get_collision_point()
             water_height = last_collision.y
-            var possible_collision = $WaterCast.get_collider()
+            var possible_collision = water_cast.get_collider()
             if possible_collision != null:
                 collision_object = possible_collision
-        elif $WaterCast.is_colliding():
-            last_collision = $WaterCast.get_collision_point()
+        elif water_cast.is_colliding():
+            # print('downward collision %s' % [self])
+            last_collision = water_cast.get_collision_point()
             water_height = last_collision.y
-            var possible_collision = $WaterCast.get_collider()
+            var possible_collision = water_cast.get_collider()
             if possible_collision != null:
                 collision_object = possible_collision
     else:

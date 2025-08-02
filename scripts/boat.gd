@@ -50,7 +50,6 @@ func _physics_process(delta: float) -> void:
 
 		mouse_movement = Vector2()
 
-	
 	var was_in_water = in_water
 	var collision_object: Path3D = null
 	submerged = false
