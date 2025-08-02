@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxcfulcykclg7"]
+
+[ext_resource type="Script" uid="uid://cim876hxy5g8n" path="res://sounds/audio_manager.gd" id="1_xdsxf"]
+[ext_resource type="Script" uid="uid://xwc66bhtg8qv" path="res://sounds/sound_effect.gd" id="2_jmdko"]
+[ext_resource type="Resource" uid="uid://b31q6yvv3tbj5" path="res://sounds/resources/big_splash.tres" id="3_6aj3w"]
+
+[node name="AudioManager" type="Node3D"]
+script = ExtResource("1_xdsxf")
+sound_effects = Array[ExtResource("2_jmdko")]([ExtResource("3_6aj3w")])

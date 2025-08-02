@@ -20,6 +20,7 @@ extends RigidBody3D
 @onready var fadeout_sound: AudioStreamPlayer3D = $FadeOut
 
 var submerged = false
+var in_water = false
 
 # References: https://www.youtube.com/watch?v=_R2KDcAp1YQ, https://www.youtube.com/watch?v=UaOQdMKQrjA
 
@@ -49,18 +50,23 @@ func _physics_process(delta: float) -> void:
 
         mouse_movement = Vector2()
 
+    
+    var was_in_water = in_water
     var collision_object: Path3D = null
     submerged = false
+    in_water = false
     for p in probes:
         var depth = p.water_height - p.global_position.y + depth_bias
         # if p.in_water and depth > 0:
         # what happens if we're not in water lol
-        if p.in_water and depth > 0:
-            submerged = true
-            if p.collision_object and p.collision_object.get_parent() is Path3D:
-                collision_object = p.collision_object.get_parent()
-            var force = Vector3.UP * float_force * gravity * depth
-            apply_force(force, p.global_position - global_position)
+        if p.in_water:
+            in_water = true
+            if depth > 0:
+                submerged = true
+                if p.collision_object and p.collision_object.get_parent() is Path3D:
+                    collision_object = p.collision_object.get_parent()
+                var force = Vector3.UP * float_force * gravity * depth
+                apply_force(force, p.global_position - global_position)
     
     if submerged:
         # river flow
@@ -103,11 +109,16 @@ func _physics_process(delta: float) -> void:
             if Input.is_action_pressed("move_right"):
                 apply_torque(Vector3(0, -1, 0)*turn_force)
 
+    # Sound stuff
+    if was_in_water == false and in_water == true:
+        AudioManager.create_3d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BIG_SPLASH)
+
     if not (Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")):
         if accelerate_sound.playing:
             fadeout_sound.play(1.0)
             accelerate_sound.stop()
 
+    # Update Arrow 
     if GameManager._current_delivery != null and GameManager._current_delivery.delivery_status != GameManager.DELIVERY_STATUS.DELIVERED:
         # update arrow position
         if len(GameManager.shortest_path_arr) > 1:
