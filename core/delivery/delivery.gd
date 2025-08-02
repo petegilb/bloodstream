@@ -9,4 +9,4 @@ extends Resource
 var delivery_status = GameManager.DELIVERY_STATUS.STARTED
 
 func _to_string() -> String:
-    return "Deliver %s from %s to %s!" % [str(delivery_type), str(source), str(destination)]
+    return "Deliver %s from %s to %s!" % [str(GameManager.DELIVERY_TYPE.keys()[delivery_type]), str(source), str(destination)]
