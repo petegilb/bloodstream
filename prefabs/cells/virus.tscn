@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://biywk3ehfgyhl"]
+[gd_scene load_steps=4 format=3 uid="uid://biywk3ehfgyhl"]
 
 [ext_resource type="ArrayMesh" uid="uid://dopwand2wb3xn" path="res://models/cells/cells_Virus.res" id="1_4i4xg"]
+[ext_resource type="Script" uid="uid://cgp2yfstxylh0" path="res://prefabs/cells/virus.gd" id="1_yjfkp"]
 
-[node name="Virus" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_yjfkp"]
+radius = 3.49917
+
+[node name="Virus" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_yjfkp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_4i4xg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yjfkp")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true

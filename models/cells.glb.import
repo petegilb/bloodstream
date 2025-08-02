@@ -37,6 +37,10 @@ _subresources={
 "Virus": {
 "use_external/enabled": true,
 "use_external/path": "uid://baia7lna51iit"
+},
+"VirusFace": {
+"use_external/enabled": true,
+"use_external/path": "uid://dbtjrj8u86245"
 }
 },
 "meshes": {

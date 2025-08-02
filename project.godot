@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 GameManager="*res://scripts/game_manager.gd"
 AudioManager="*res://sounds/audio_manager.tscn"
 
+[global_group]
+
+NavigationGroup=""
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
@@ -53,6 +57,10 @@ move_right={
 3d_physics/layer_2="Water"
 3d_physics/layer_4="Room"
 3d_physics/layer_9="Camera"
+
+[navigation]
+
+3d/default_cell_size=0.1
 
 [rendering]
 
