@@ -1,6 +1,6 @@
 extends Pickup
 
-@export var health_amount := 10
+@export var health_amount := 25
 
 func _pickup(character: BoatCharacter):
     print('pill picked up')

@@ -188,4 +188,5 @@ func get_behind_camera(behind_distance: float, in_front := false) -> Vector3:
 	if in_front:
 		distance_factor = -distance_factor
 	var behind_position := camera_transform.origin + distance_factor
+	behind_position += camera.global_transform.basis.x * randf_range(-4.0, 4.0)
 	return behind_position

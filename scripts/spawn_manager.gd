@@ -25,8 +25,8 @@ var difficulty_stages = {
 
 var difficulty_modifiers = {
     DIFFICULTY_STAGES.HEALTHY: 0.0,
-    DIFFICULTY_STAGES.SNIFFLES: 2.0,
-    DIFFICULTY_STAGES.UNDER_WEATHER: 3.0,
+    DIFFICULTY_STAGES.SNIFFLES: 1.0,
+    DIFFICULTY_STAGES.UNDER_WEATHER: 2.0,
     DIFFICULTY_STAGES.VIRAL: 4.0,
     DIFFICULTY_STAGES.FEVER: 5.0,
     DIFFICULTY_STAGES.CHOLESTEROL: 7.0,
@@ -133,7 +133,7 @@ func spawn_pickup(nav_map):
     var spawn_point : Vector3
     var set_spawn_point := false
     
-    var random_choice := randi_range(0, 1)
+    var random_choice := randi_range(0, 2)
     if random_choice == 0:
         spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager.player.get_behind_camera(SPAWN_DISTANCE, true))
         set_spawn_point = true
