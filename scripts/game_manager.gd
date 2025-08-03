@@ -22,14 +22,20 @@ var enemies_node: Node3D = null
 var pickups_node: Node3D = null
 var spawn_manager: SpawnManager = null
 var for_shaders: Node3D = null
+var first_delivery := true
 
 # vars to not be reset on replay
 var delivery_list: DeliveryList = preload("res://core/delivery/resources/delivery_list.tres")
+var new_delivery_list := {}
 var virus_scene = preload("res://prefabs/cells/virus.tscn")
 var spawn_manager_class = preload("res://core/spawn_manager.tscn")
 var mouse_sensitivity := 1.0
 var volume_modifier := 1.0
 var default_volume: float
+var organ_list: Array[Room] = []
+var left_lung = null
+var right_lung = null
+var other_organs := []
 
 func _ready() -> void:
 	initialize_game()
@@ -66,8 +72,27 @@ func initialize_game() -> bool:
 			rooms.append(child)
 			room_to_bounds[bounds.room_resource] = bounds
 
+			# set lungs
+			if str(bounds).contains("Left Lung"):
+				left_lung = bounds.room_resource
+			elif str(bounds).contains("Right Lung"):
+				right_lung = bounds.room_resource
+
+			if not str(child).contains("Junction"):
+				other_organs.append(bounds.room_resource)
+				
+
 			if not room_name_to_resource.get(str(bounds)):
 				room_name_to_resource[str(bounds)] = bounds.room_resource
+
+	for organ in other_organs:
+		if new_delivery_list.get(organ):
+			new_delivery_list[organ].append()
+		else:
+			new_delivery_list[organ] = [left_lung, right_lung]
+	
+	new_delivery_list[left_lung] = other_organs
+	new_delivery_list[right_lung] = other_organs
 
 	print("Map Graph: ", map_graph)
 	# print(dijkstra(map_graph, "Heart Left Atrium 2", "Heart Left Atrium 1"))
@@ -102,6 +127,7 @@ func replay():
 	pickups_node = null
 	spawn_manager = null
 	for_shaders = null
+	first_delivery = true
 
 	get_tree().change_scene_to_file("res://levels/mainlevel.tscn")
 	# get_tree().change_scene_to_packed(
@@ -174,7 +200,28 @@ func update_game_state(new_state: GAME_STATE):
 
 func get_next_delivery() -> Delivery:
 	var delivery_list_arr := delivery_list.delivery_list
-	return delivery_list_arr.pick_random().duplicate(true)
+	var base_delivery: Delivery = delivery_list_arr.pick_random().duplicate(true)
+	if first_delivery:
+		first_delivery = false
+		var choice_lung = left_lung if randi_range(0, 1) == 0 else right_lung
+		base_delivery.source = choice_lung
+		base_delivery.destination = new_delivery_list.get(choice_lung).pick_random()
+		print('assigned first delivery')
+	elif _current_room != null:
+		var possible_next_rooms: Array = new_delivery_list.get(_current_room.room_resource)
+		base_delivery.source = _current_room.room_resource
+		base_delivery.destination = possible_next_rooms.pick_random()
+		print('assigned delivery from current room')
+	else:
+		base_delivery.source = left_lung
+		base_delivery.destination = new_delivery_list.get(left_lung).pick_random()
+		print('assigned a lung delivery...')
+		
+	if str(base_delivery.source).contains("Lung"):
+		base_delivery.delivery_type = GameManager.DELIVERY_TYPE.OXYGEN
+	else:
+		base_delivery.delivery_type = GameManager.DELIVERY_TYPE.C02
+	return base_delivery
 
 func update_shortest_path():
 	# update shortest path calculation

@@ -148,8 +148,9 @@ func spawn_pickup(nav_map):
 
     if set_spawn_point:
         var new_pickup = scene_to_spawn.instantiate()
-        new_pickup.global_position = spawn_point + Vector3(0, 1, 0)
         GameManager.pickups_node.add_child(new_pickup)
+        new_pickup.global_position = spawn_point + Vector3(0, 1, 0)
+        new_pickup.initialize()
         print('spawned pickup successfully')
     else:
         print('failed to spawn pickup')

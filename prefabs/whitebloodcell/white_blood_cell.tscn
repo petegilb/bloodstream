@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5qnqgnmw526v"]
+[gd_scene load_steps=6 format=3 uid="uid://c5qnqgnmw526v"]
 
 [ext_resource type="Script" uid="uid://ciy8epux6wvr1" path="res://prefabs/whitebloodcell/white_blood_cell.gd" id="1_s2qcq"]
 [ext_resource type="ArrayMesh" uid="uid://ly8rv0xmilr8" path="res://models/cells/cells_WhiteBloodCell.res" id="1_smrac"]
+[ext_resource type="AudioStream" uid="uid://d03qd5ildctsb" path="res://sounds/shoot_sound.wav" id="3_gd0mt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smrac"]
 albedo_color = Color(1, 1, 1, 0.886275)
@@ -24,5 +25,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_smrac")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_smrac")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_gd0mt")
+pitch_scale = 0.8
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

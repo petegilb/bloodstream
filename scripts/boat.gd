@@ -209,7 +209,7 @@ func shoot():
 	print('shooting')
 
 	var new_bullet: WhiteBloodCell = white_blood_cell.instantiate()
-	new_bullet.global_position = shoot_location.global_position
 	get_tree().current_scene.add_child(new_bullet)
+	new_bullet.global_position = shoot_location.global_position
 	# new_bullet.apply_impulse(Vector3(0, 1, 0) * 5.0)
 	new_bullet.apply_impulse(-camera.global_transform.basis.z * shoot_forward_strength + Vector3(0, 1, 0) * shoot_upward_strength)

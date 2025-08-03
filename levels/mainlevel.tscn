@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=66 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -202,6 +202,9 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmo63"]
+albedo_color = Color(0.5, 0.1, 0.1, 1)
 
 [node name="Mainlevel" type="Node3D"]
 script = ExtResource("1_natwr")
@@ -689,6 +692,26 @@ health_amount = 25
 
 [node name="WhiteBloodCell" parent="ForShaders" instance=ExtResource("32_dmo63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.21803, 0)
+
+[node name="BlockedWalls" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BlockedWalls"]
+transform = Transform3D(-0.509642, 0, -0.860386, 0, 1, 0, 0.860386, 0, -0.509642, -375.631, 54.6642, -763.423)
+material_override = SubResource("StandardMaterial3D_dmo63")
+use_collision = true
+size = Vector3(30, 30, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="BlockedWalls"]
+transform = Transform3D(-0.908996, 0, 0.416804, 0, 1, 0, -0.416804, 0, -0.908996, 721.953, 1.28553, -594.053)
+material_override = SubResource("StandardMaterial3D_dmo63")
+use_collision = true
+size = Vector3(30, 30, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="BlockedWalls"]
+transform = Transform3D(-0.12677, 0, 0.991932, 0, 1, 0, -0.991932, 0, -0.12677, -272.272, 56.9719, -74.783)
+material_override = SubResource("StandardMaterial3D_dmo63")
+use_collision = true
+size = Vector3(30, 30, 1)
 
 [editable path="Organs/LeftHeartAtrium1/RoomBounds"]
 [editable path="Organs/LeftHeartAtrium2/RoomBounds"]
