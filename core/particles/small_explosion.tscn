@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://boja7qc70vsoh"]
+
+[ext_resource type="Script" uid="uid://ciiov5w6cbe4u" path="res://core/particles/particle_starter.gd" id="1_o7xqe"]
+[ext_resource type="CylinderMesh" uid="uid://c3amiaceyj16f" path="res://core/particles/particle_cone_mesh.tres" id="2_ltu08"]
+
+[sub_resource type="Curve" id="Curve_ltu08"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.735343, 0.996012), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pobsd"]
+curve = SubResource("Curve_ltu08")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ltu08"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 12.0
+initial_velocity_max = 14.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_pobsd")
+
+[sub_resource type="Curve" id="Curve_p7diw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xlxnm"]
+curve = SubResource("Curve_p7diw")
+
+[sub_resource type="Curve" id="Curve_pobsd"]
+_data = [Vector2(0, 0.038957), 0.0, 0.0, 0, 0, Vector2(0.155779, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p7diw"]
+curve = SubResource("Curve_pobsd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pobsd"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 5, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_p7diw")
+color = Color(0.28, 0.25648, 0.2408, 1)
+alpha_curve = SubResource("CurveTexture_xlxnm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltu08"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_ltu08"]
+material = SubResource("StandardMaterial3D_ltu08")
+radial_segments = 8
+rings = 4
+
+[node name="SmallExplosion" type="Node3D"]
+script = ExtResource("1_o7xqe")
+
+[node name="Debris" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 24
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ltu08")
+draw_pass_1 = ExtResource("2_ltu08")
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pobsd")
+draw_pass_1 = SubResource("SphereMesh_ltu08")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pobsd")
+draw_pass_1 = SubResource("SphereMesh_ltu08")

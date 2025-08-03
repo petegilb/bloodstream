@@ -12,6 +12,8 @@ enum VIRUS_STATE {WANDER, CHASE, ATTACK}
 @export var base_damage := 5
 @export var show_debug := false
 
+var particle = preload("res://core/particles/small_explosion.tscn")
+
 @onready var navigation_agent = $NavigationAgent3D
 @onready var debug_label = $DebugLabel
 
@@ -38,6 +40,7 @@ func attack():
     
     # handle damage here
     GameManager.player.add_health(-base_damage)
+    initiate_death()
 
 func _process(_delta: float) -> void:
     if show_debug:
@@ -87,3 +90,11 @@ func _physics_process(delta: float) -> void:
         attack()
 
     move_and_slide()
+
+func initiate_death():
+    AudioManager.create_3d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.EXPLOSION)
+    if particle:
+        var new_particle = particle.instantiate()
+        get_tree().current_scene.add_child(new_particle)
+        new_particle.global_position = global_position
+    self.queue_free()

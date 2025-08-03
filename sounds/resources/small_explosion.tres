@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://b38t4spat0be7"]
+
+[ext_resource type="Script" uid="uid://xwc66bhtg8qv" path="res://sounds/sound_effect.gd" id="1_syjle"]
+[ext_resource type="AudioStream" uid="uid://collc21et17c2" path="res://sounds/small_explosion.wav" id="2_jltth"]
+
+[resource]
+script = ExtResource("1_syjle")
+limit = 5
+type = 3
+sound_effect = ExtResource("2_jltth")
+volume = 0.0
+pitch_scale = 0.92
+pitch_randomness = 0.44
+metadata/_custom_type_script = "uid://xwc66bhtg8qv"

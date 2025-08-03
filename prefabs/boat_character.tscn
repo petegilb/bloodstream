@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dodflpxwoog8b"]
+[gd_scene load_steps=14 format=3 uid="uid://dodflpxwoog8b"]
 
 [ext_resource type="ArrayMesh" uid="uid://cui5mvisw4qwp" path="res://models/boat_Boat.res" id="1_3sn2q"]
 [ext_resource type="Script" uid="uid://b61nwjvwmlja" path="res://scripts/boat.gd" id="1_tu7rq"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dm3p7www4xo8p" path="res://sounds/engine_accelerate.wav" id="8_xjuar"]
 [ext_resource type="AudioStream" uid="uid://pnucuuav5uvp" path="res://sounds/engine_fadeout.wav" id="9_dhwpv"]
 [ext_resource type="AudioStream" uid="uid://bl7ltxv2bn83j" path="res://sounds/engine_boost.wav" id="9_ynfvf"]
+[ext_resource type="AudioStream" uid="uid://bk3cy34pkhaem" path="res://sounds/lava_loop.wav" id="11_tmo8g"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tu7rq"]
 points = PackedVector3Array(1.14894, 1.01494, 2.17147, -1.14894, 1.01494, 2.17147, 0, 0.936323, 3.13899, 1.14894, 0.305607, 2.17147, 1.14871, 0.980186, -2.77219, -1.14894, 0.305607, 2.17147, -1.14894, 0.980186, -2.77219, 0, 0.104807, 3.13899, 0.574469, 0.149463, 2.65523, 1.14871, 0.229267, -2.77219, -0.000224948, 0.936323, -2.94734, -0.574469, 0.149463, 2.65523, -1.14894, 0.229267, -2.77219, -0.574694, 0.935729, -2.85977, -0.000224948, 0.00341767, -2.93602, 0.574244, 0.0797571, -2.85857, -0.000224948, 0.138274, -2.94734, -0.574694, 0.0797571, -2.85857)
@@ -24,7 +25,7 @@ float_force = 2.0
 river_passive_force = 20
 forward_row_force = 30
 backward_row_force = 15
-boost_modifier = 4.0
+boost_modifier = 2.5
 turn_force = 10
 gas_depletion_rate = 20.0
 
@@ -83,9 +84,15 @@ volume_db = -1.057
 
 [node name="Boost" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("9_ynfvf")
-volume_db = -1.057
+volume_db = 1.289
+pitch_scale = 0.57
 
 [node name="FadeOut" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("9_dhwpv")
 volume_db = -3.172
 pitch_scale = 1.34
+
+[node name="LavaLoop" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_tmo8g")
+volume_db = 8.661
+autoplay = true
