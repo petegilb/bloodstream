@@ -14,6 +14,8 @@ extends RigidBody3D
 @export var non_submerged_movement_modifer := .4
 @export var arrow_lerp_speed := 5.0
 @export var base_health := 100
+@export var max_gas := 100
+@export var gas_depletion_rate := 5.0
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -25,6 +27,7 @@ extends RigidBody3D
 var submerged = false
 var in_water = false
 var health = base_health
+var gas = 50
 
 # References: https://www.youtube.com/watch?v=_R2KDcAp1YQ, https://www.youtube.com/watch?v=UaOQdMKQrjA
 
@@ -79,8 +82,9 @@ func _physics_process(delta: float) -> void:
 				apply_force(force, p.global_position - global_position)
 	
 	var final_forward_row_force = forward_row_force
-	if Input.is_action_pressed("boost"):
+	if Input.is_action_pressed("boost") and gas > 0:
 		final_forward_row_force *= boost_modifier
+		gas = clamp(gas - (gas_depletion_rate * delta), 0, max_gas)
 		if not boost_sound.playing:
 			boost_sound.play()
 	else:

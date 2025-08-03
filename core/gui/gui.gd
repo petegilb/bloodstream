@@ -8,7 +8,8 @@ extends Control
 @onready var delivery_status = $MarginContainer3/VBoxContainer/HBoxContainer/DeliveryStatus
 @onready var game_over_screen = $GameOverScreen
 @onready var pause_screen = $PauseScreen
-@onready var health_bar: ProgressBar = $MarginContainer4/HealthBar
+@onready var health_bar: ProgressBar = $MarginContainer4/VBoxContainer/HealthBar
+@onready var gas_bar: ProgressBar = $MarginContainer4/VBoxContainer/GasBar
 @onready var volume_slider: Slider = $PauseScreen/VBoxContainer/HBoxContainer/VolumeSlider
 @onready var sensitivity_slider: Slider = $PauseScreen/VBoxContainer/HBoxContainer2/SensitivitySlider
 

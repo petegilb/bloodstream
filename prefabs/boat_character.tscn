@@ -26,6 +26,7 @@ forward_row_force = 25
 backward_row_force = 15
 boost_modifier = 4.0
 turn_force = 10
+gas_depletion_rate = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_3sn2q")
