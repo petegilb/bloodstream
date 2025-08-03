@@ -214,8 +214,6 @@ sky_mode = 2
 
 [node name="BoatCharacter" parent="." instance=ExtResource("2_cxcq7")]
 transform = Transform3D(0.994403, 0, 0.105657, 0, 1, 0, -0.105657, 0, 0.994403, 171.425, -92.4781, -407.355)
-river_passive_force = 20
-forward_row_force = 40
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_k5cwj")

@@ -8,6 +8,7 @@ extends RigidBody3D
 
 @export var forward_row_force := 20
 @export var backward_row_force := 10
+@export var boost_modifier := 2.0
 @export var turn_force := 2
 @export var depth_bias := .5
 @export var non_submerged_movement_modifer := .4
@@ -19,6 +20,7 @@ extends RigidBody3D
 @onready var arrow := $Arrow
 @onready var accelerate_sound: AudioStreamPlayer3D = $Accelerate
 @onready var fadeout_sound: AudioStreamPlayer3D = $FadeOut
+@onready var boost_sound: AudioStreamPlayer3D = $Boost
 
 var submerged = false
 var in_water = false
@@ -76,6 +78,13 @@ func _physics_process(delta: float) -> void:
 				var force = Vector3.UP * float_force * gravity * depth
 				apply_force(force, p.global_position - global_position)
 	
+	var final_forward_row_force = forward_row_force
+	if Input.is_action_pressed("boost"):
+		final_forward_row_force *= boost_modifier
+		if not boost_sound.playing:
+			boost_sound.play()
+	else:
+		boost_sound.stop()
 	if submerged:
 		# river flow
 		if collision_object != null:
@@ -85,11 +94,11 @@ func _physics_process(delta: float) -> void:
 			apply_central_force(river_forward_direction*river_passive_force)
 
 		if Input.is_action_pressed("move_forward"):
-			apply_central_force(global_transform.basis.z*forward_row_force)
+			apply_central_force(global_transform.basis.z*final_forward_row_force)
 			if not accelerate_sound.playing:
 				accelerate_sound.play()
 		if Input.is_action_pressed("move_backward"):
-			apply_central_force(-global_transform.basis.z*forward_row_force)
+			apply_central_force(-global_transform.basis.z*backward_row_force)
 			if not accelerate_sound.playing:
 				accelerate_sound.play()
 			if Input.is_action_pressed("move_left"):
@@ -104,9 +113,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		# allow moving outside of water just in case (it's weaker than normal)
 		if Input.is_action_pressed("move_forward"):
-			apply_central_force(global_transform.basis.z*forward_row_force * non_submerged_movement_modifer)
+			apply_central_force(global_transform.basis.z*final_forward_row_force * non_submerged_movement_modifer)
 		if Input.is_action_pressed("move_backward"):
-			apply_central_force(-global_transform.basis.z*forward_row_force * non_submerged_movement_modifer)
+			apply_central_force(-global_transform.basis.z*backward_row_force * non_submerged_movement_modifer)
 			if Input.is_action_pressed("move_left"):
 				apply_torque(Vector3(0, -1, 0)*turn_force)
 			if Input.is_action_pressed("move_right"):
