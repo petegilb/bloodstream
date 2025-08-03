@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://wda3sp1357m2"]
+[gd_scene load_steps=10 format=3 uid="uid://wda3sp1357m2"]
 
 [ext_resource type="Script" uid="uid://ddrycxh6kvrdg" path="res://core/gui/gui.gd" id="1_0diof"]
 [ext_resource type="StyleBox" uid="uid://bn16754tdksls" path="res://core/gui/style/panel_style.tres" id="2_sp6a4"]
@@ -26,6 +26,35 @@ bg_color = Color(0.72, 0.19512, 0.1368, 1)
 font_size = 56
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sp6a4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q4mm"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 218.0
+content_margin_bottom = 5.0
+bg_color = Color(0.288518, 0.288518, 0.288518, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bhigh"]
+bg_color = Color(0.6, 0.42, 0.42, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttq4o"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 200.0
+content_margin_bottom = 5.0
+bg_color = Color(0.288518, 0.288518, 0.288518, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -257,10 +286,40 @@ size_flags_horizontal = 4
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_sp6a4")
 
-[node name="HSeparator" type="HSeparator" parent="PauseScreen/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseScreen/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
-theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="Label" type="Label" parent="PauseScreen/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "VOLUME:"
+
+[node name="VolumeSlider" type="HSlider" parent="PauseScreen/VBoxContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_5q4mm")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_bhigh")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseScreen/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "SENSITIVITY:"
+
+[node name="SensitivitySlider" type="HSlider" parent="PauseScreen/VBoxContainer/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_ttq4o")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_bhigh")
+min_value = 0.1
+max_value = 2.0
+step = 0.05
+value = 1.1
 
 [node name="ResumeButton" type="Button" parent="PauseScreen/VBoxContainer"]
 process_mode = 3
@@ -298,6 +357,8 @@ text = "QUIT"
 
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="PauseScreen/VBoxContainer/HBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="PauseScreen/VBoxContainer/HBoxContainer2/SensitivitySlider" to="." method="_on_sensitivity_slider_value_changed"]
 [connection signal="pressed" from="PauseScreen/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PauseScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="PauseScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

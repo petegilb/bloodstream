@@ -53,8 +53,8 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and mouse_movement != Vector2():
-		$CameraPivot.rotation_degrees.y += -mouse_movement.x
-		$CameraPivot/CameraTilt.rotation_degrees.x += mouse_movement.y
+		$CameraPivot.rotation_degrees.y += -mouse_movement.x * GameManager.mouse_sensitivity
+		$CameraPivot/CameraTilt.rotation_degrees.x += mouse_movement.y * GameManager.mouse_sensitivity
 		$CameraPivot/CameraTilt.rotation_degrees.x = clamp($CameraPivot/CameraTilt.rotation_degrees.x, 0, 90)
 
 		mouse_movement = Vector2()

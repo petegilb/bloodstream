@@ -20,12 +20,16 @@ var map_graph: Dictionary = {}
 var shortest_path_arr: Array = []
 var enemies_node: Node3D = null
 
+# vars to not be reset on replay
 var delivery_list: DeliveryList = preload("res://core/delivery/resources/delivery_list.tres")
-
 var virus_scene = preload("res://prefabs/cells/virus.tscn")
+var mouse_sensitivity := 1.0
+var volume_modifier := 1.0
+var default_volume: float
 
 func _ready() -> void:
 	initialize_game()
+	default_volume = AudioServer.get_bus_volume_linear(0)
 
 func initialize_game() -> bool:
 	main_scene = get_tree().current_scene
@@ -111,6 +115,10 @@ func resume():
 	update_game_state(GAME_STATE.INPROGRESS)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
+
+func set_volume(volume: float):
+	volume_modifier = volume
+	AudioServer.set_bus_volume_linear(0, default_volume * volume_modifier)
 
 func _process(_delta: float) -> void:
 	if game_state == GAME_STATE.GAMEOVER:

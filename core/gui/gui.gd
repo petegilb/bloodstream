@@ -9,10 +9,14 @@ extends Control
 @onready var game_over_screen = $GameOverScreen
 @onready var pause_screen = $PauseScreen
 @onready var health_bar: ProgressBar = $MarginContainer4/HealthBar
+@onready var volume_slider: Slider = $PauseScreen/VBoxContainer/HBoxContainer/VolumeSlider
+@onready var sensitivity_slider: Slider = $PauseScreen/VBoxContainer/HBoxContainer2/SensitivitySlider
 
 func _ready() -> void:
     game_over_screen.visible = false
     pause_screen.visible = false
+    volume_slider.value = GameManager.volume_modifier
+    sensitivity_slider.value = GameManager.mouse_sensitivity
 
 func set_current_room_label(new_text: String) -> void:
     current_room_label.text = new_text
@@ -36,3 +40,9 @@ func _on_quit_button_pressed() -> void:
 func _on_resume_button_pressed() -> void:
     pause_screen.visible = false
     GameManager.resume()
+
+func _on_volume_slider_value_changed(value:float) -> void:
+    GameManager.set_volume(value)
+
+func _on_sensitivity_slider_value_changed(value:float) -> void:
+    GameManager.mouse_sensitivity = value
