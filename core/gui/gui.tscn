@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://wda3sp1357m2"]
+[gd_scene load_steps=7 format=3 uid="uid://wda3sp1357m2"]
 
 [ext_resource type="Script" uid="uid://ddrycxh6kvrdg" path="res://core/gui/gui.gd" id="1_0diof"]
+[ext_resource type="StyleBox" uid="uid://bn16754tdksls" path="res://core/gui/style/panel_style.tres" id="2_sp6a4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx4gr"]
+bg_color = Color(0.637843, 0.637843, 0.637843, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.163601, 0.0196188, 0.0145441, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sp6a4"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.72, 0.19512, 0.1368, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sp6a4"]
+font_size = 56
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sp6a4"]
 
 [node name="Gui" type="Control"]
 layout_mode = 3
@@ -132,3 +157,78 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "None"
+
+[node name="MarginContainer4" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 207.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer4"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cx4gr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sp6a4")
+value = 58.79
+show_percentage = false
+
+[node name="GameOverScreen" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -181.5
+offset_right = 268.0
+offset_bottom = 181.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_sp6a4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="GameOverScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_sp6a4")
+
+[node name="HSeparator" type="HSeparator" parent="GameOverScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="ReplayButton" type="Button" parent="GameOverScreen/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 31
+text = "REPLAY?"
+
+[node name="HSeparator2" type="HSeparator" parent="GameOverScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="QuitButton" type="Button" parent="GameOverScreen/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 31
+text = "QUIT"
+
+[connection signal="pressed" from="GameOverScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="GameOverScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

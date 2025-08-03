@@ -12,6 +12,7 @@ extends RigidBody3D
 @export var depth_bias := .5
 @export var non_submerged_movement_modifer := .4
 @export var arrow_lerp_speed := 5.0
+@export var base_health := 100
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -21,6 +22,7 @@ extends RigidBody3D
 
 var submerged = false
 var in_water = false
+var health = base_health
 
 # References: https://www.youtube.com/watch?v=_R2KDcAp1YQ, https://www.youtube.com/watch?v=UaOQdMKQrjA
 
@@ -28,7 +30,7 @@ var mouse_movement = Vector2()
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	pass
+	# GameManager.update_game_state(GameManager.GAME_STATE.INPROGRESS)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -41,6 +43,10 @@ func _input(event: InputEvent) -> void:
 
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
+
+func _process(_delta: float) -> void:
+	if health <= 0:
+		GameManager.update_game_state(GameManager.GAME_STATE.GAMEOVER)
 
 func _physics_process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and mouse_movement != Vector2():
@@ -110,7 +116,7 @@ func _physics_process(delta: float) -> void:
 
 	# Sound stuff
 	if was_in_water == false and in_water == true:
-		AudioManager.create_3d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.BIG_SPLASH)
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.BIG_SPLASH)
 
 	if not (Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_backward")):
 		if accelerate_sound.playing:
@@ -131,11 +137,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			arrow.visible = false
 	else:
-		arrow.visible = false
-		
-		
+		arrow.visible = false	
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if submerged:
 		state.linear_velocity *= 1 - water_drag
 		state.angular_velocity *= 1 - water_angular_drag 
+
+func add_health(toadd: int) -> void:
+	var old_health = health
+	health = clamp(health + toadd, 0, base_health)
+	print("Player Health: %d -> %d" % [old_health, health])

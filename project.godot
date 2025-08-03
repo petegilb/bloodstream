@@ -56,11 +56,8 @@ move_right={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Water"
 3d_physics/layer_4="Room"
+3d_physics/layer_8="Virus"
 3d_physics/layer_9="Camera"
-
-[navigation]
-
-3d/default_cell_size=0.1
 
 [rendering]
 

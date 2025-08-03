@@ -30,3 +30,10 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeartAtrium2_Water/_StaticBody3D_50664"]
 shape = SubResource("ConcavePolygonShape3D_ivovq")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.05895, 0)
+height = 88.15
+vertices = PackedVector3Array(3.87194, 0, -95.9987, -4.606, 0, 22.495, -26.343, 0, 23.327, -26.2713, 0, -94.6694)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

@@ -7,9 +7,11 @@
 radius = 3.49917
 
 [node name="Virus" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_yjfkp")
+movement_speed = 25.0
+show_debug = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_4i4xg")
@@ -18,4 +20,9 @@ mesh = ExtResource("1_4i4xg")
 shape = SubResource("SphereShape3D_yjfkp")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
+
+[node name="DebugLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.80244, 0)
+text = "TEST"
+font_size = 227
+outline_size = 5
