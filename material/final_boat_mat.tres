@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cc7x6umv3bvnf"]
+
+[ext_resource type="Texture2D" uid="uid://ckxlaug5mw0ey" path="res://models/FinalBoat_RedBloodCell_Albedo.png" id="1_krwe7"]
+
+[resource]
+resource_name = "BoatHull"
+albedo_texture = ExtResource("1_krwe7")
+roughness = 0.5

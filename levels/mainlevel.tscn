@@ -228,9 +228,6 @@ navigation_mesh = SubResource("NavigationMesh_k5cwj")
 
 [node name="Pickups" type="Node3D" parent="."]
 
-[node name="BasePickup" parent="Pickups" instance=ExtResource("4_k5cwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.351, -102.763, -440.688)
-
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Organs" type="Node3D" parent="."]
