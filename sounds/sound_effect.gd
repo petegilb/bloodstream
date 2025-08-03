@@ -12,7 +12,8 @@ enum SOUND_EFFECT_TYPE {
     YUM,
     EXPLOSION,
     FIZZLE_OUT,
-    VIRUS_SPAWNED
+    VIRUS_SPAWNED,
+    VIRUS_DEATH
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

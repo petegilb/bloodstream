@@ -24,6 +24,7 @@ var fading_messages_timing: Array[float] = []
 var is_fading_message := false
 
 func _ready() -> void:
+	loading_screen.visible = true
 	game_over_screen.visible = false
 	pause_screen.visible = false
 	fading_message.visible = false

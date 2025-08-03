@@ -448,6 +448,7 @@ grow_vertical = 0
 text = "testttttt"
 
 [node name="LoadingScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

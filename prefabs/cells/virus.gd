@@ -25,6 +25,9 @@ var virus_state: VIRUS_STATE = VIRUS_STATE.WANDER
 #     #navigation_agent.target_position = 
 #     pass
 
+func _ready() -> void:
+    debug_label.visible = show_debug
+
 func set_current_room(new_room: RoomBounds):
     current_room = new_room
 
@@ -100,3 +103,8 @@ func initiate_death():
         get_tree().current_scene.add_child(new_particle)
         new_particle.global_position = global_position
     self.queue_free()
+
+func kill():
+    print('virus killed!')
+    AudioManager.create_3d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.VIRUS_DEATH)
+    queue_free()

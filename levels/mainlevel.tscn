@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=65 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://boja7qc70vsoh" path="res://core/particles/small_explosion.tscn" id="29_nc3jh"]
 [ext_resource type="PackedScene" uid="uid://b1p7mgnu1h517" path="res://core/pickups/pill_pickup.tscn" id="30_dmo63"]
 [ext_resource type="PackedScene" uid="uid://biywk3ehfgyhl" path="res://prefabs/cells/virus.tscn" id="31_ahajf"]
+[ext_resource type="PackedScene" uid="uid://c5qnqgnmw526v" path="res://prefabs/whitebloodcell/white_blood_cell.tscn" id="32_dmo63"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cxcq7"]
 sky_top_color = Color(0.989204, 0.696157, 0.689012, 1)
@@ -682,8 +683,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.434, -92.137, -382.329)
 [node name="BasePickup" parent="ForShaders" instance=ExtResource("4_k5cwj")]
 
 [node name="BasePickup2" parent="ForShaders" instance=ExtResource("30_dmo63")]
+health_amount = 25
 
 [node name="Virus" parent="ForShaders" instance=ExtResource("31_ahajf")]
+
+[node name="WhiteBloodCell" parent="ForShaders" instance=ExtResource("32_dmo63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.21803, 0)
 
 [editable path="Organs/LeftHeartAtrium1/RoomBounds"]
 [editable path="Organs/LeftHeartAtrium2/RoomBounds"]

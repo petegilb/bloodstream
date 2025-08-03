@@ -37,7 +37,7 @@ var difficulty_modifiers = {
 # when to switch to next difficulty stage (in elapsed minutes)
 var difficulty_timing = {
     DIFFICULTY_STAGES.HEALTHY: 0.0,
-    DIFFICULTY_STAGES.SNIFFLES: .5,
+    DIFFICULTY_STAGES.SNIFFLES: .1,
     DIFFICULTY_STAGES.UNDER_WEATHER: 3.0,
     DIFFICULTY_STAGES.VIRAL: 6.0,
     DIFFICULTY_STAGES.FEVER: 10.0,
@@ -139,7 +139,7 @@ func spawn_pickup(nav_map):
         set_spawn_point = true
     else:
         if GameManager._current_room != null:
-            spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager._current_room.global_position)
+            spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager._current_room.global_position + Vector3(randf_range(-5.0, 5.0), 0 ,0)  )
             set_spawn_point = true
         elif len(GameManager.shortest_path_arr) > 1 and GameManager.room_name_to_resource.get(GameManager.shortest_path_arr[1]):
             spawn_point = GameManager.room_to_bounds.get(GameManager.room_name_to_resource.get(GameManager.shortest_path_arr[1])).global_position

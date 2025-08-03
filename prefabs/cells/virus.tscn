@@ -11,7 +11,6 @@ collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_yjfkp")
 movement_speed = 9.0
-show_debug = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_4i4xg")

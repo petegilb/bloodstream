@@ -17,6 +17,9 @@ extends RigidBody3D
 @export var max_gas := 100
 @export var gas_depletion_rate := 5.0
 @export var display_mouse_movement_debug := false
+@export var fire_rate := .5
+@export var shoot_forward_strength := 5.0
+@export var shoot_upward_strength := 5.0
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -25,12 +28,15 @@ extends RigidBody3D
 @onready var fadeout_sound: AudioStreamPlayer3D = $FadeOut
 @onready var boost_sound: AudioStreamPlayer3D = $Boost
 @onready var camera: Camera3D = $CameraPivot/CameraTilt/SpringArm3D/Camera3D
+@onready var shoot_location: Node3D = $ShootLocation
 
+var white_blood_cell = preload("res://prefabs/whitebloodcell/white_blood_cell.tscn")
 var submerged = false
 var in_water = false
 var health = base_health
 var gas = 50
 var time_alive = 0.0
+var shoot_timer = 0.0
 
 # References: https://www.youtube.com/watch?v=_R2KDcAp1YQ, https://www.youtube.com/watch?v=UaOQdMKQrjA
 
@@ -55,6 +61,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		GameManager.pause()
 
+	if event.is_action_pressed("shoot"):
+		shoot()
+
 	if event is InputEventMouseMotion and display_mouse_movement_debug:
 		GameManager.gui.mouse_movement_debug.text = str(event.relative)
 	if event is InputEventMouseMotion and event.relative != Vector2():
@@ -64,6 +73,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	time_alive += delta
+	shoot_timer += delta
 
 	if health <= 0:
 		GameManager.update_game_state(GameManager.GAME_STATE.GAMEOVER)
@@ -190,3 +200,16 @@ func get_behind_camera(behind_distance: float, in_front := false) -> Vector3:
 	var behind_position := camera_transform.origin + distance_factor
 	behind_position += camera.global_transform.basis.x * randf_range(-4.0, 4.0)
 	return behind_position
+
+func shoot():
+	if shoot_timer < fire_rate:
+		return
+	
+	shoot_timer = 0.0
+	print('shooting')
+
+	var new_bullet: WhiteBloodCell = white_blood_cell.instantiate()
+	new_bullet.global_position = shoot_location.global_position
+	get_tree().current_scene.add_child(new_bullet)
+	# new_bullet.apply_impulse(Vector3(0, 1, 0) * 5.0)
+	new_bullet.apply_impulse(-camera.global_transform.basis.z * shoot_forward_strength + Vector3(0, 1, 0) * shoot_upward_strength)
