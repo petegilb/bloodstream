@@ -56,6 +56,8 @@ func _physics_process(delta: float) -> void:
     if distance <= attack_radius:
         virus_state = VIRUS_STATE.ATTACK
     elif str(GameManager._current_room) == str(current_room) or distance <= detection_radius:
+        if virus_state != VIRUS_STATE.CHASE:
+            AudioManager.create_3d_audio_at_location(global_position, SoundEffect.SOUND_EFFECT_TYPE.VIRUS_SPAWNED)
         virus_state = VIRUS_STATE.CHASE
     else:
         virus_state = VIRUS_STATE.WANDER

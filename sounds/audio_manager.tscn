@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxcfulcykclg7"]
+[gd_scene load_steps=8 format=3 uid="uid://bxcfulcykclg7"]
 
 [ext_resource type="Script" uid="uid://cim876hxy5g8n" path="res://sounds/audio_manager.gd" id="1_xdsxf"]
 [ext_resource type="Script" uid="uid://xwc66bhtg8qv" path="res://sounds/sound_effect.gd" id="2_jmdko"]
@@ -6,7 +6,8 @@
 [ext_resource type="Resource" uid="uid://bc1wn5k2601nl" path="res://sounds/resources/yum.tres" id="4_8bfp5"]
 [ext_resource type="Resource" uid="uid://b38t4spat0be7" path="res://sounds/resources/small_explosion.tres" id="5_6n5tw"]
 [ext_resource type="Resource" uid="uid://b62jp122r01p0" path="res://sounds/resources/fizzle_out.tres" id="6_vwu7p"]
+[ext_resource type="Resource" uid="uid://6puktfpcovcx" path="res://sounds/resources/virus_spawned.tres" id="7_5ap4w"]
 
 [node name="AudioManager" type="Node3D"]
 script = ExtResource("1_xdsxf")
-sound_effects = Array[ExtResource("2_jmdko")]([ExtResource("3_6aj3w"), ExtResource("4_8bfp5"), ExtResource("5_6n5tw"), ExtResource("6_vwu7p")])
+sound_effects = Array[ExtResource("2_jmdko")]([ExtResource("3_6aj3w"), ExtResource("4_8bfp5"), ExtResource("5_6n5tw"), ExtResource("6_vwu7p"), ExtResource("7_5ap4w")])

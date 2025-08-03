@@ -4,8 +4,12 @@ extends Node3D
 enum DIFFICULTY_STAGES {HEALTHY, SNIFFLES, UNDER_WEATHER, VIRAL, FEVER, CHOLESTEROL, BLOOD_PRESSURE, HEART}
 
 var virus_scene = preload("res://prefabs/cells/virus.tscn")
+var carrot_scene = preload("res://core/pickups/carrot_pickup.tscn")
+var pill_scene = preload("res://core/pickups/pill_pickup.tscn")
 var navigation_region: NavigationRegion3D = null
 var is_initialized = false
+
+var pickup_scenes := []
 
 # TODO add high cholesterol or high blood pressure
 var difficulty_stages = {
@@ -43,6 +47,7 @@ var difficulty_timing = {
 }
 
 const ENEMY_SPAWN_INTERVAL := 10.0
+const PICKUP_SPAWN_INTERVAL := 15.0
 const SPAWN_DISTANCE := 50.0
 const MIN_SPAWN_DISTANCE := 40
 const MAX_SPAWN_DISTANCE := 100
@@ -50,6 +55,7 @@ const MAX_ENEMIES_PER_FRAME := 5
 var current_difficulty_stage = DIFFICULTY_STAGES.HEALTHY
 var next_difficulty_stage = 1
 var spawn_timer := 0.0
+var pickup_spawn_timer := 0.0
 
 func _ready() -> void:
     update_difficulty_stage_label()
@@ -62,10 +68,13 @@ func update_difficulty_stage_label(fading_message:= false):
 
 func initialize(nav_region: NavigationRegion3D):
     navigation_region = nav_region
+    pickup_scenes.append(pill_scene)
+    pickup_scenes.append(carrot_scene)
     is_initialized = true
 
 func _process(delta: float) -> void:
     spawn_timer += delta
+    pickup_spawn_timer += delta
 
     var current_timer = GameManager.get_timer()
     if difficulty_timing.get(next_difficulty_stage)*60 <= current_timer:
@@ -77,6 +86,10 @@ func _process(delta: float) -> void:
     if spawn_timer >= ENEMY_SPAWN_INTERVAL:
         spawn_enemies()
         spawn_timer = 0.0
+
+    if pickup_spawn_timer >= PICKUP_SPAWN_INTERVAL:
+        spawn_pickups()
+        pickup_spawn_timer = 0.0
 
 func on_new_stage():
     update_difficulty_stage_label(true)
@@ -95,7 +108,7 @@ func spawn_enemy() -> bool:
     var spawn_point := NavigationServer3D.map_get_closest_point(nav_map, GameManager.player.get_behind_camera(SPAWN_DISTANCE))
     if not check_spawn_point(spawn_point):
         spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager.player.get_behind_camera(SPAWN_DISTANCE, true))
-    if not check_spawn_point(spawn_point):
+    if (not check_spawn_point(spawn_point)) and GameManager._current_room != null:
         spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager._current_room.global_position)
     if not check_spawn_point(spawn_point):
         return false
@@ -115,5 +128,34 @@ func spawn_enemies():
     
     print('spawned %d / %d enemies...' % [successfully_spawned, num_enemies])
 
+func spawn_pickup(nav_map):
+    var scene_to_spawn = pickup_scenes[randi_range(0, len(pickup_scenes) - 1)]
+    var spawn_point : Vector3
+    var set_spawn_point := false
+    
+    var random_choice := randi_range(0, 1)
+    if random_choice == 0:
+        spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager.player.get_behind_camera(SPAWN_DISTANCE, true))
+        set_spawn_point = true
+    else:
+        if GameManager._current_room != null:
+            spawn_point = NavigationServer3D.map_get_closest_point(nav_map, GameManager._current_room.global_position)
+            set_spawn_point = true
+        elif len(GameManager.shortest_path_arr) > 1 and GameManager.room_name_to_resource.get(GameManager.shortest_path_arr[1]):
+            spawn_point = GameManager.room_to_bounds.get(GameManager.room_name_to_resource.get(GameManager.shortest_path_arr[1])).global_position
+            spawn_point = NavigationServer3D.map_get_closest_point(nav_map, spawn_point)
+            set_spawn_point = true
+
+    if set_spawn_point:
+        var new_pickup = scene_to_spawn.instantiate()
+        new_pickup.global_position = spawn_point + Vector3(0, 1, 0)
+        GameManager.pickups_node.add_child(new_pickup)
+        print('spawned pickup successfully')
+    else:
+        print('failed to spawn pickup')
+
 func spawn_pickups():
-    pass
+    var nav_map := navigation_region.get_navigation_map()
+    var num_pickups = randi_range(1, 2)
+    for idx in num_pickups:
+        spawn_pickup(nav_map)

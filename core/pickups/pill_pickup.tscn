@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1p7mgnu1h517"]
+[gd_scene load_steps=4 format=3 uid="uid://b1p7mgnu1h517"]
 
 [ext_resource type="PackedScene" uid="uid://c7f1t1d4q35nr" path="res://core/pickups/base_pickup.tscn" id="1_2edu8"]
 [ext_resource type="ArrayMesh" uid="uid://nuy8p24lm14e" path="res://models/pickups/Pill_PillPickup.res" id="2_j6uvt"]
+[ext_resource type="Script" uid="uid://suwek513tc8j" path="res://core/pickups/pill_pickup.gd" id="2_na58o"]
 
-[node name="BasePickup" instance=ExtResource("1_2edu8")]
+[node name="PillPickup" instance=ExtResource("1_2edu8")]
+script = ExtResource("2_na58o")
+health_amount = 10
 
 [node name="Mesh" parent="." index="1"]
 mesh = ExtResource("2_j6uvt")

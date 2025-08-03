@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://6puktfpcovcx"]
+
+[ext_resource type="Script" uid="uid://xwc66bhtg8qv" path="res://sounds/sound_effect.gd" id="1_aupwo"]
+[ext_resource type="AudioStream" uid="uid://c1w53pbdxansj" path="res://sounds/virus_spawned.wav" id="2_aupwo"]
+
+[resource]
+script = ExtResource("1_aupwo")
+limit = 2
+type = 5
+sound_effect = ExtResource("2_aupwo")
+volume = 11.511
+pitch_scale = 1.26
+pitch_randomness = 0.22
+metadata/_custom_type_script = "uid://xwc66bhtg8qv"

@@ -19,8 +19,7 @@ var room_to_bounds: Dictionary = {}
 var map_graph: Dictionary = {}
 var shortest_path_arr: Array = []
 var enemies_node: Node3D = null
-var enemies: Array[Virus] = []
-var pickups: Array[Pickup] = []
+var pickups_node: Node3D = null
 var spawn_manager: SpawnManager = null
 var for_shaders: Node3D = null
 
@@ -43,6 +42,7 @@ func initialize_game() -> bool:
 	gui = main_scene.find_child("Gui")
 	player = main_scene.find_child("BoatCharacter")
 	enemies_node = main_scene.find_child("Enemies")
+	pickups_node = main_scene.find_child("Pickups")
 	for_shaders = main_scene.find_child("ForShaders")
 
 	spawn_manager = spawn_manager_class.instantiate()
@@ -99,8 +99,7 @@ func replay():
 	map_graph = {}
 	shortest_path_arr = []
 	enemies_node = null
-	enemies = []
-	pickups = []
+	pickups_node = null
 	spawn_manager = null
 	for_shaders = null
 
