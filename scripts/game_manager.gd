@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 enum GAME_STATE {PREGAME, INPROGRESS, PAUSED, GAMEOVER}
 enum DELIVERY_STATUS {STARTED, RETRIEVED, DELIVERED, FAILED = -1}
@@ -9,7 +9,7 @@ var _current_delivery: Delivery = null
 var _completed_deliveries := 0
 
 var game_state = GAME_STATE.PREGAME
-var main_scene: Node3D = null
+var main_scene: Main = null
 var gui: Gui = null
 var player: BoatCharacter = null
 var paths: Array[BloodRiver] = []
@@ -19,10 +19,14 @@ var room_to_bounds: Dictionary = {}
 var map_graph: Dictionary = {}
 var shortest_path_arr: Array = []
 var enemies_node: Node3D = null
+var enemies: Array[Virus] = []
+var pickups: Array[Pickup] = []
+var spawn_manager: SpawnManager = null
 
 # vars to not be reset on replay
 var delivery_list: DeliveryList = preload("res://core/delivery/resources/delivery_list.tres")
 var virus_scene = preload("res://prefabs/cells/virus.tscn")
+var spawn_manager_class = preload("res://core/spawn_manager.tscn")
 var mouse_sensitivity := 1.0
 var volume_modifier := 1.0
 var default_volume: float
@@ -38,6 +42,9 @@ func initialize_game() -> bool:
 	gui = main_scene.find_child("Gui")
 	player = main_scene.find_child("BoatCharacter")
 	enemies_node = main_scene.find_child("Enemies")
+
+	spawn_manager = spawn_manager_class.instantiate()
+	main_scene.add_child(spawn_manager)
 
 	# construct graph for paths between rooms
 	for child in main_scene.find_children("*"):
@@ -90,6 +97,9 @@ func replay():
 	map_graph = {}
 	shortest_path_arr = []
 	enemies_node = null
+	enemies = []
+	pickups = []
+	spawn_manager = null
 
 	get_tree().change_scene_to_file("res://levels/mainlevel.tscn")
 	# get_tree().change_scene_to_packed(
@@ -99,11 +109,18 @@ func actor_setup():
 	# Wait for the first physics frame so the NavigationServer can sync.
 	await get_tree().physics_frame
 	
+	if main_scene and main_scene.navigation_region:
+		spawn_manager.initialize(main_scene.navigation_region)
+	# spawn_manager.spawn_enemies()
+	# spawn_manager.spawn_pickups()
 	# spawn 1 virus per room
-	for room in rooms:
-		var new_virus: Virus = virus_scene.instantiate()
-		enemies_node.add_child(new_virus)
-		new_virus.global_position = room.global_position
+	# for room in rooms:
+	# 	var new_virus: Virus = virus_scene.instantiate()
+	# 	enemies_node.add_child(new_virus)
+	# 	new_virus.global_position = room.global_position
+
+	if gui:
+		gui.set_fading_message("You are a Red Blood Cell!\nDo your best to defend your body from viruses and get stronger!", 5.0)
 
 func pause():
 	update_game_state(GAME_STATE.PAUSED)
@@ -119,6 +136,9 @@ func resume():
 func set_volume(volume: float):
 	volume_modifier = volume
 	AudioServer.set_bus_volume_linear(0, default_volume * volume_modifier)
+
+func get_timer() -> float:
+	return player.time_alive
 
 func _process(_delta: float) -> void:
 	if game_state == GAME_STATE.GAMEOVER:

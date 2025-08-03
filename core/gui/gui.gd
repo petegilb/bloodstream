@@ -14,10 +14,17 @@ extends Control
 @onready var sensitivity_slider: Slider = $PauseScreen/VBoxContainer/HBoxContainer2/SensitivitySlider
 @onready var elapsed_time: Label = $MarginContainer3/VBoxContainer/HBoxContainer2/ElapsedTime
 @onready var final_timer: Label = $GameOverScreen/VBoxContainer/FinalTimer
+@onready var difficulty_stage_label: Label = $MarginContainer3/VBoxContainer/HBoxContainer3/DifficultyStage
+@onready var fading_message: Label = $FadingMessage
+
+var fading_messages: Array[String] = []
+var fading_messages_timing: Array[float] = []
+var is_fading_message := false
 
 func _ready() -> void:
 	game_over_screen.visible = false
 	pause_screen.visible = false
+	fading_message.visible = false
 	volume_slider.value = GameManager.volume_modifier
 	sensitivity_slider.value = GameManager.mouse_sensitivity
 
@@ -59,3 +66,35 @@ func _on_volume_slider_value_changed(value:float) -> void:
 
 func _on_sensitivity_slider_value_changed(value:float) -> void:
 	GameManager.mouse_sensitivity = value
+
+func _start_fading_message():
+	is_fading_message = true
+	var message = fading_messages.pop_front()
+	var fading_message_speed = fading_messages_timing.pop_front()
+	if not (fading_message and message):
+		return
+	fading_message.visible = true
+	fading_message.modulate.a = 0.0
+	fading_message.text = message
+	# var target_modulate = fading_message.modulate
+	# target_modulate.a = 0.0
+	var tween = get_tree().create_tween()
+	tween.tween_property(fading_message, "modulate:a", 1.0, 1)
+	tween.tween_interval(fading_message_speed)
+	tween.tween_property(fading_message, "modulate:a", 0.0, 1)
+	tween.tween_callback(_finish_fading_message)
+
+func _finish_fading_message():
+	fading_message.visible = false
+	if len(fading_messages) > 0:
+		_start_fading_message()
+	else:
+		is_fading_message = false
+
+# This is the method that should be called to set a fading message
+func set_fading_message(new_message: String, fading_message_speed=1.0):
+	fading_messages.append(new_message)
+	fading_messages_timing.append(fading_message_speed)
+	if is_fading_message == false:
+		_start_fading_message()
+	print('set new fading message %s' % new_message)

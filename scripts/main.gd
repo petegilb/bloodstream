@@ -1,4 +1,7 @@
+class_name Main
 extends Node3D
+
+@onready var navigation_region: NavigationRegion3D = $NavigationRegion3D
 
 func _ready() -> void:
     pass

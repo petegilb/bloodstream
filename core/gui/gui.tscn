@@ -178,6 +178,22 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "DIFFICULTY:"
+
+[node name="DifficultyStage" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Unknown"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -241,6 +257,7 @@ value = 58.79
 show_percentage = false
 
 [node name="GameOverScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -393,6 +410,23 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 31
 text = "QUIT"
+
+[node name="FadingMessage" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.304
+anchor_right = 0.5
+anchor_bottom = 0.304
+offset_left = -365.0
+offset_top = -21.6274
+offset_right = 365.0
+offset_bottom = 21.6434
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 31
+text = "TESTING A MESSAGE HERE AND STUFF LIKE THAT!"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
