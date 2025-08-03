@@ -120,7 +120,7 @@ func actor_setup():
 	# 	new_virus.global_position = room.global_position
 
 	if gui:
-		gui.set_fading_message("You are a Red Blood Cell!\nDo your best to defend your body from viruses and get stronger!", 5.0)
+		gui.set_fading_message("You are a Red Blood Cell!\nDeliver oxygen to organs and defeat viruses with white blood cells!", 5.0)
 
 func pause():
 	update_game_state(GAME_STATE.PAUSED)

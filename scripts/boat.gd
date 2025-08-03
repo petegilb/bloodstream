@@ -23,6 +23,7 @@ extends RigidBody3D
 @onready var accelerate_sound: AudioStreamPlayer3D = $Accelerate
 @onready var fadeout_sound: AudioStreamPlayer3D = $FadeOut
 @onready var boost_sound: AudioStreamPlayer3D = $Boost
+@onready var camera: Camera3D = $CameraPivot/CameraTilt/SpringArm3D/Camera3D
 
 var submerged = false
 var in_water = false
@@ -172,3 +173,11 @@ func add_gas(toadd: int) -> void:
 	var old_gas = gas
 	gas = clamp(gas + toadd, 0, max_gas)
 	print("Gas: %d -> %d" % [old_gas, gas])
+
+func get_behind_camera(behind_distance: float, in_front := false) -> Vector3:
+	var camera_transform := camera.global_transform
+	var distance_factor := camera_transform.basis.z * behind_distance
+	if in_front:
+		distance_factor = -distance_factor
+	var behind_position := camera_transform.origin + distance_factor
+	return behind_position
