@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjuuecxwi7k3e"]
+
+[ext_resource type="PackedScene" uid="uid://c7f1t1d4q35nr" path="res://core/pickups/base_pickup.tscn" id="1_ttqh4"]
+[ext_resource type="Script" uid="uid://cjck6oft57lso" path="res://core/pickups/carrot.gd" id="2_kkl5f"]
+[ext_resource type="ArrayMesh" uid="uid://bjtlafo3a6g37" path="res://models/pickups/Carrot_CarrotBunch.res" id="3_kdp0s"]
+
+[node name="BasePickup" instance=ExtResource("1_ttqh4")]
+script = ExtResource("2_kkl5f")
+gas_amount = 25
+
+[node name="Mesh" parent="." index="1"]
+mesh = ExtResource("3_kdp0s")

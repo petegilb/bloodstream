@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://bc1wn5k2601nl"]
+
+[ext_resource type="Script" uid="uid://xwc66bhtg8qv" path="res://sounds/sound_effect.gd" id="1_7obmv"]
+[ext_resource type="AudioStream" uid="uid://b4cc8earjbvq8" path="res://sounds/yum.wav" id="2_q6vxq"]
+
+[resource]
+script = ExtResource("1_7obmv")
+limit = 5
+type = 2
+sound_effect = ExtResource("2_q6vxq")
+volume = 5.0
+pitch_scale = 1.0
+pitch_randomness = 0.22
+metadata/_custom_type_script = "uid://xwc66bhtg8qv"

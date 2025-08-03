@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7f1t1d4q35nr"]
+
+[ext_resource type="Script" uid="uid://crsu55fx58m2c" path="res://core/pickups/pickup.gd" id="1_ky5jt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c4apx"]
+radius = 2.31657
+
+[node name="BasePickup" type="Node3D"]
+script = ExtResource("1_ky5jt")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_c4apx")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

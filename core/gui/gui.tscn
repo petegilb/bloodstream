@@ -194,6 +194,22 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "None"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer3/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Time Alive:"
+
+[node name="ElapsedTime" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "0:00"
+
 [node name="MarginContainer4" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -225,7 +241,6 @@ value = 58.79
 show_percentage = false
 
 [node name="GameOverScreen" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -250,6 +265,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_sp6a4")
+
+[node name="FinalTimer" type="Label" parent="GameOverScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "You survived for !"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="GameOverScreen/VBoxContainer"]
 layout_mode = 2
@@ -278,6 +299,7 @@ theme_override_font_sizes/font_size = 31
 text = "QUIT"
 
 [node name="PauseScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

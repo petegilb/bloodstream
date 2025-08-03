@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://d3xnc4rwvnm06"]
+[gd_scene load_steps=61 format=3 uid="uid://d3xnc4rwvnm06"]
 
 [ext_resource type="PackedScene" uid="uid://bp5fbwdjy14n" path="res://prefabs/blood_river.tscn" id="1_cxcq7"]
 [ext_resource type="Script" uid="uid://cyut0su3xehb5" path="res://scripts/spline_multimesh.gd" id="1_mlnnp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dodflpxwoog8b" path="res://prefabs/boat_character.tscn" id="2_cxcq7"]
 [ext_resource type="PackedScene" uid="uid://58wpcsvbvggv" path="res://prefabs/rooms/heart_atrium_2.tscn" id="3_6wtob"]
 [ext_resource type="PackedScene" uid="uid://4pn1n18e51hx" path="res://prefabs/csg_tube.tscn" id="3_p5hok"]
+[ext_resource type="PackedScene" uid="uid://cjuuecxwi7k3e" path="res://core/pickups/carrot_pickup.tscn" id="4_k5cwj"]
 [ext_resource type="PackedScene" uid="uid://du0wq3ta6hm3r" path="res://core/room/overlap/room_bounds.tscn" id="4_lrn0d"]
 [ext_resource type="PackedScene" uid="uid://cl163faksk3wu" path="res://prefabs/rooms/heart_atrium_1.tscn" id="5_054ed"]
 [ext_resource type="Resource" uid="uid://cf7jq4avjbpaw" path="res://core/room/resources/heart_left_atrium2.tres" id="5_lrn0d"]
@@ -217,6 +218,11 @@ transform = Transform3D(0.994403, 0, 0.105657, 0, 1, 0, -0.105657, 0, 0.994403, 
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_k5cwj")
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="BasePickup" parent="Pickups" instance=ExtResource("4_k5cwj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.351, -102.763, -440.688)
 
 [node name="Enemies" type="Node3D" parent="."]
 

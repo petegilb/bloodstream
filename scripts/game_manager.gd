@@ -134,6 +134,7 @@ func _process(_delta: float) -> void:
 	
 	gui.health_bar.value = player.health
 	gui.gas_bar.value = player.gas
+	gui.set_timer(player.time_alive)
 	if _current_delivery == null:
 		set_current_delivery(get_next_delivery())
 	else:

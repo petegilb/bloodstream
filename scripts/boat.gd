@@ -28,6 +28,7 @@ var submerged = false
 var in_water = false
 var health = base_health
 var gas = 50
+var time_alive = 0.0
 
 # References: https://www.youtube.com/watch?v=_R2KDcAp1YQ, https://www.youtube.com/watch?v=UaOQdMKQrjA
 
@@ -52,7 +53,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	time_alive += delta
+
 	if health <= 0:
 		GameManager.update_game_state(GameManager.GAME_STATE.GAMEOVER)
 
@@ -164,3 +167,8 @@ func add_health(toadd: int) -> void:
 	var old_health = health
 	health = clamp(health + toadd, 0, base_health)
 	print("Player Health: %d -> %d" % [old_health, health])
+
+func add_gas(toadd: int) -> void:
+	var old_gas = gas
+	gas = clamp(gas + toadd, 0, max_gas)
+	print("Gas: %d -> %d" % [old_gas, gas])
