@@ -38,15 +38,15 @@ var difficulty_modifiers = {
 var difficulty_timing = {
     DIFFICULTY_STAGES.HEALTHY: 0.0,
     DIFFICULTY_STAGES.SNIFFLES: .5,
-    DIFFICULTY_STAGES.UNDER_WEATHER: 2.0,
-    DIFFICULTY_STAGES.VIRAL: 4.0,
-    DIFFICULTY_STAGES.FEVER: 6.0,
-    DIFFICULTY_STAGES.CHOLESTEROL: 10.0,
-    DIFFICULTY_STAGES.BLOOD_PRESSURE: 15.0,
-    DIFFICULTY_STAGES.HEART: 20.0,
+    DIFFICULTY_STAGES.UNDER_WEATHER: 1.5,
+    DIFFICULTY_STAGES.VIRAL: 3.0,
+    DIFFICULTY_STAGES.FEVER: 4.0,
+    DIFFICULTY_STAGES.CHOLESTEROL: 6.0,
+    DIFFICULTY_STAGES.BLOOD_PRESSURE: 9.0,
+    DIFFICULTY_STAGES.HEART: 12.0,
 }
 
-const ENEMY_SPAWN_INTERVAL := 10.0
+const ENEMY_SPAWN_INTERVAL := 8.0
 const PICKUP_SPAWN_INTERVAL := 15.0
 const SPAWN_DISTANCE := 50.0
 const MIN_SPAWN_DISTANCE := 40
@@ -129,7 +129,7 @@ func spawn_enemies():
     print('spawned %d / %d enemies...' % [successfully_spawned, num_enemies])
 
 func spawn_pickup(nav_map):
-    var scene_to_spawn = pickup_scenes[randi_range(0, len(pickup_scenes) - 1)]
+    var scene_to_spawn = pill_scene if randi_range(0, 2) == 0 else carrot_scene
     var spawn_point : Vector3
     var set_spawn_point := false
     
