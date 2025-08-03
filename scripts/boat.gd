@@ -16,6 +16,7 @@ extends RigidBody3D
 @export var base_health := 100
 @export var max_gas := 100
 @export var gas_depletion_rate := 5.0
+@export var display_mouse_movement_debug := false
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var probes: Array[Node] = $ProbeContainer.get_children()
@@ -37,22 +38,29 @@ var mouse_movement = Vector2()
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if display_mouse_movement_debug:
+		GameManager.gui.mouse_movement_debug.visible = true
 	# GameManager.update_game_state(GameManager.GAME_STATE.INPROGRESS)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			mouse_movement = Vector2()
 
 	if event.is_action_pressed("ui_cancel"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: 
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN: 
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	if event.is_action_pressed("pause"):
 		GameManager.pause()
 
-	if event is InputEventMouseMotion:
-		mouse_movement = event.relative
+	if event is InputEventMouseMotion and display_mouse_movement_debug:
+		GameManager.gui.mouse_movement_debug.text = str(event.relative)
+	if event is InputEventMouseMotion and event.relative != Vector2():
+		mouse_movement = event.relative * GameManager.mouse_sensitivity
+	else:
+		mouse_movement = Vector2()
 
 func _process(delta: float) -> void:
 	time_alive += delta
@@ -61,9 +69,9 @@ func _process(delta: float) -> void:
 		GameManager.update_game_state(GameManager.GAME_STATE.GAMEOVER)
 
 func _physics_process(delta: float) -> void:
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and mouse_movement != Vector2():
-		$CameraPivot.rotation_degrees.y += -mouse_movement.x * GameManager.mouse_sensitivity
-		$CameraPivot/CameraTilt.rotation_degrees.x += mouse_movement.y * GameManager.mouse_sensitivity
+	if (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN) and mouse_movement != Vector2():
+		$CameraPivot.rotation_degrees.y += -mouse_movement.x
+		$CameraPivot/CameraTilt.rotation_degrees.x += mouse_movement.y
 		$CameraPivot/CameraTilt.rotation_degrees.x = clamp($CameraPivot/CameraTilt.rotation_degrees.x, 0, 90)
 
 		mouse_movement = Vector2()

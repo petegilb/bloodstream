@@ -16,6 +16,8 @@ extends Control
 @onready var final_timer: Label = $GameOverScreen/VBoxContainer/FinalTimer
 @onready var difficulty_stage_label: Label = $MarginContainer3/VBoxContainer/HBoxContainer3/DifficultyStage
 @onready var fading_message: Label = $FadingMessage
+@onready var mouse_movement_debug: Label = $MouseMovementDebug
+@onready var loading_screen = $LoadingScreen
 
 var fading_messages: Array[String] = []
 var fading_messages_timing: Array[float] = []
@@ -25,6 +27,7 @@ func _ready() -> void:
 	game_over_screen.visible = false
 	pause_screen.visible = false
 	fading_message.visible = false
+	mouse_movement_debug.visible = false
 	volume_slider.value = GameManager.volume_modifier
 	sensitivity_slider.value = GameManager.mouse_sensitivity
 

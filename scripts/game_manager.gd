@@ -22,6 +22,7 @@ var enemies_node: Node3D = null
 var enemies: Array[Virus] = []
 var pickups: Array[Pickup] = []
 var spawn_manager: SpawnManager = null
+var for_shaders: Node3D = null
 
 # vars to not be reset on replay
 var delivery_list: DeliveryList = preload("res://core/delivery/resources/delivery_list.tres")
@@ -42,6 +43,7 @@ func initialize_game() -> bool:
 	gui = main_scene.find_child("Gui")
 	player = main_scene.find_child("BoatCharacter")
 	enemies_node = main_scene.find_child("Enemies")
+	for_shaders = main_scene.find_child("ForShaders")
 
 	spawn_manager = spawn_manager_class.instantiate()
 	main_scene.add_child(spawn_manager)
@@ -100,6 +102,7 @@ func replay():
 	enemies = []
 	pickups = []
 	spawn_manager = null
+	for_shaders = null
 
 	get_tree().change_scene_to_file("res://levels/mainlevel.tscn")
 	# get_tree().change_scene_to_packed(
@@ -111,6 +114,11 @@ func actor_setup():
 	
 	if main_scene and main_scene.navigation_region:
 		spawn_manager.initialize(main_scene.navigation_region)
+
+	await get_tree().create_timer(1.0).timeout
+	for child in for_shaders.get_children():
+		child.queue_free()
+	gui.loading_screen.visible = false
 	# spawn_manager.spawn_enemies()
 	# spawn_manager.spawn_pickups()
 	# spawn 1 virus per room
@@ -131,6 +139,7 @@ func pause():
 func resume():
 	update_game_state(GAME_STATE.INPROGRESS)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	get_tree().paused = false
 
 func set_volume(volume: float):
