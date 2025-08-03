@@ -7,10 +7,12 @@ extends Control
 @onready var completed_deliveries = $MarginContainer/VBoxContainer/HBoxContainer2/CompletedDeliveries
 @onready var delivery_status = $MarginContainer3/VBoxContainer/HBoxContainer/DeliveryStatus
 @onready var game_over_screen = $GameOverScreen
+@onready var pause_screen = $PauseScreen
 @onready var health_bar: ProgressBar = $MarginContainer4/HealthBar
 
 func _ready() -> void:
     game_over_screen.visible = false
+    pause_screen.visible = false
 
 func set_current_room_label(new_text: String) -> void:
     current_room_label.text = new_text
@@ -30,3 +32,7 @@ func _on_replay_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
     get_tree().quit()
+
+func _on_resume_button_pressed() -> void:
+    pause_screen.visible = false
+    GameManager.resume()

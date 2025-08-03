@@ -59,6 +59,7 @@ func initialize_game() -> bool:
 	print("Map Graph: ", map_graph)
 	# print(dijkstra(map_graph, "Heart Left Atrium 2", "Heart Left Atrium 1"))
 	actor_setup.call_deferred()
+	GameManager.update_game_state(GameManager.GAME_STATE.INPROGRESS)
 	return true
 
 func initialize_deferred():
@@ -66,11 +67,9 @@ func initialize_deferred():
 	if not initialize_game():
 		initialize_deferred.call_deferred()
 		return
-	GameManager.update_game_state(GameManager.GAME_STATE.INPROGRESS)
 	get_tree().paused = false
 
 func replay():
-	# update_game_state(GAME_STATE.INPROGRESS)
 	# reset necessary variables
 	_current_room = null
 	_current_delivery = null
@@ -101,6 +100,17 @@ func actor_setup():
 		var new_virus: Virus = virus_scene.instantiate()
 		enemies_node.add_child(new_virus)
 		new_virus.global_position = room.global_position
+
+func pause():
+	update_game_state(GAME_STATE.PAUSED)
+	gui.pause_screen.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
+
+func resume():
+	update_game_state(GAME_STATE.INPROGRESS)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = false
 
 func _process(_delta: float) -> void:
 	if game_state == GAME_STATE.GAMEOVER:

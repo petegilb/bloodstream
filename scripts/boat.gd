@@ -41,6 +41,9 @@ func _input(event: InputEvent) -> void:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: 
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	if event.is_action_pressed("pause"):
+		GameManager.pause()
+
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 

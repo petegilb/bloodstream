@@ -179,6 +179,7 @@ value = 58.79
 show_percentage = false
 
 [node name="GameOverScreen" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -230,5 +231,73 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 31
 text = "QUIT"
 
+[node name="PauseScreen" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -181.5
+offset_right = 268.0
+offset_bottom = 181.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_sp6a4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_sp6a4")
+
+[node name="HSeparator" type="HSeparator" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="ResumeButton" type="Button" parent="PauseScreen/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 31
+text = "RESUME"
+
+[node name="HSeparator3" type="HSeparator" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="ReplayButton" type="Button" parent="PauseScreen/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 31
+text = "REPLAY?"
+
+[node name="HSeparator2" type="HSeparator" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sp6a4")
+
+[node name="QuitButton" type="Button" parent="PauseScreen/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 31
+text = "QUIT"
+
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
