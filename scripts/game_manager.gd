@@ -86,10 +86,7 @@ func initialize_game() -> bool:
 				room_name_to_resource[str(bounds)] = bounds.room_resource
 
 	for organ in other_organs:
-		if new_delivery_list.get(organ):
-			new_delivery_list[organ].append()
-		else:
-			new_delivery_list[organ] = [left_lung, right_lung]
+		new_delivery_list[organ] = [left_lung, right_lung]
 	
 	new_delivery_list[left_lung] = other_organs
 	new_delivery_list[right_lung] = other_organs
@@ -191,6 +188,7 @@ func _process(_delta: float) -> void:
 	gui.set_timer(player.time_alive)
 	if _current_delivery == null:
 		set_current_delivery(get_next_delivery())
+		update_delivery_status()
 	else:
 		gui.delivery_status.text = DELIVERY_STATUS.keys()[_current_delivery.delivery_status]
 
